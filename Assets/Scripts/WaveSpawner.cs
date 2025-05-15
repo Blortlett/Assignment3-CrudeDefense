@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public class Wave
-    {
-        public GameObject[] EnemyPrefab; //Array of enemies to pick from
-        public int EnemyCount; //Enemies per wave
-        public float SpawnRate; //Enemies per second
-        public float TimeBetweenWaves;
+    public GameObject[] EnemyPrefab; //Array of enemies to pick from
+    public int EnemyCount; //Enemies per wave
+    public float SpawnRate; //Enemies per second
+    public float TimeBetweenWaves;
 
-        private int CurrentWave = 0;
-        private float CountDown = 2.0f;
-        private bool isSpawning = false;
-    }
+    private int CurrentWave = 0;
+    private float CountDown = 2.0f;
+    private bool isSpawning = false;
 
     // Start is called before the first frame update
     void Start()
