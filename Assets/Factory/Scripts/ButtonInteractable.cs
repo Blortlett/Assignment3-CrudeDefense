@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scr_ButtonInteractable : MonoBehaviour,  IInteractable
+public class ButtonInteractable : MonoBehaviour,  Interactable
 {
     public bool CanInteract()
     {
