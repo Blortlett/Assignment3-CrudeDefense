@@ -21,6 +21,10 @@ public class ButtonInteractable : MonoBehaviour,  IInteractable
         Debug.Log("Button pressed :)");
     }
 
+    public float GetOriginalYPosition()
+    {
+        return 0;
+    }
 
     void Start()
     {
