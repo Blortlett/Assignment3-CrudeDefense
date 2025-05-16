@@ -24,7 +24,7 @@ public class WaveSpawner : MonoBehaviour
     {
         if (!isSpawning && CountDown <= 0.0f)
         {
-            SpawnWave();
+            //SpawnWave();
             CountDown = TimeBetweenWaves;
         }
 
