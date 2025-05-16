@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Pickup variables
+    public GameObject GrabLocation;
+    private GameObject HeldObject = null;
+
+
+
+
+
+
     private Rigidbody2D Rb; //Players rigid body for movement and collision
 
     private float MoveAcceleration = 30;    //Character move speed
@@ -11,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private int LastPlayerMoveInput = 0;
 
     private bool InteractButtonPressed = false;
+
+    private List<GameObject> OverlappingObjects = new List<GameObject>();
 
     private void Awake()
     {
@@ -28,11 +39,36 @@ public class PlayerController : MonoBehaviour
     {
         Move();
 
-        if (Input.GetKey(KeyCode.E) && !InteractButtonPressed)    //If pressed E
+        if (Input.GetKey(KeyCode.E))    //If pressed E
         {
-            InteractButtonPressed = true;
+            if (!InteractButtonPressed)
+            {
+                InteractButtonPressed = true;
 
+                if (HeldObject == null) //If not holding object
+                {
 
+                    GameObject Object = FindFirstPickupableObject();      //Get object to pickup if there is one, else it is null
+
+                    if (Object != null)   //If there is object to pick up
+                    {
+                        PickupObject(Object);   //Picks up the object
+                    }
+                }
+                else
+                {
+                    PutdownObject();    //Put down object
+                }
+            }
+        }
+        else
+        {
+            InteractButtonPressed = false;
+        }
+
+        if (HeldObject != null) //If holding object
+        {
+            HeldObject.transform.position = GrabLocation.transform.position;    //Sets held object postion to the plays grab location
         }
     }
 
@@ -77,20 +113,49 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void PickupObject()
+    private void PickupObject(GameObject _Object)
     {
+        HeldObject = _Object;
+
+        HeldObject.transform.position = GrabLocation.transform.position;
+    }
+
+    private void PutdownObject()
+    {
+        HeldObject.transform.position = new Vector3(HeldObject.transform.position.x, HeldObject.GetComponent<IInteractable>().GetOriginalYPosition(), HeldObject.transform.position.z);
+        HeldObject = null;
 
     }
 
-    //When things overlap
+    GameObject FindFirstPickupableObject()
+    {
+        if (OverlappingObjects.Count != 0)
+        {
+            foreach (GameObject Object in OverlappingObjects)   //For each overlapping object
+            {
+                IInteractable InteractableScript = Object.GetComponent<IInteractable>();
+                if (InteractableScript != null)
+                {
+                    InteractableScript.CanPickup();
+
+                    return Object;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    //On overlap
     private void OnTriggerEnter2D(Collider2D _Collider)
     {
-
+        OverlappingObjects.Add(_Collider.gameObject);  //Add to list
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    //On stop overlap
+    private void OnTriggerExit2D(Collider2D _Collider)
     {
-        
+        OverlappingObjects.Remove(_Collider.gameObject);   //Remove from list
     }
 
 }
