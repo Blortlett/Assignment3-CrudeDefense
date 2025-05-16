@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ValveWheel : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Animator mAnimator;
+
     public bool CanInteract()
     {
         return true;
@@ -14,15 +16,21 @@ public class ValveWheel : MonoBehaviour, IInteractable
         return false;
     }
 
+    public float GetOriginalYPosition()
+    {
+        return 0f;
+    }
+
     public void Interact()
     {
         Debug.Log("Turning Valve Wheel");
+        mAnimator.speed = 1;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        mAnimator.speed = 0;
     }
 
     // Update is called once per frame
