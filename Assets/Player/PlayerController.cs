@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private float MaxMoveSpeed = 10;    //Character move speed
     private int LastPlayerMoveInput = 0;
 
+    private bool InteractButtonPressed = false;
+
     private void Awake()
     {
         Rb = GetComponent<Rigidbody2D>(); //Sets rigid body
@@ -18,13 +20,20 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+
+        if (Input.GetKey(KeyCode.E) && !InteractButtonPressed)    //If pressed E
+        {
+            InteractButtonPressed = true;
+
+
+        }
     }
 
     //Gets player input and moves rigid body
@@ -54,7 +63,7 @@ public class PlayerController : MonoBehaviour
                 XVelocity = 0;  //Set velocity to zero so character doesn't slide
             }
 
-                XVelocity += PlayerInput * MoveAcceleration * Time.deltaTime;   //Adds to velocity
+            XVelocity += PlayerInput * MoveAcceleration * Time.deltaTime;   //Adds to velocity
             XVelocity = Mathf.Clamp(XVelocity, -MaxMoveSpeed, MaxMoveSpeed);    //Clamps velocity between -max and max move speed
 
             Rb.velocity = new Vector2(XVelocity, 0);  //Sets player velocity
@@ -66,4 +75,22 @@ public class PlayerController : MonoBehaviour
 
         LastPlayerMoveInput = PlayerInput;  //Sets last player move input
     }
+
+
+    private void PickupObject()
+    {
+
+    }
+
+    //When things overlap
+    private void OnTriggerEnter2D(Collider2D _Collider)
+    {
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        
+    }
+
 }
