@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonInteractable : MonoBehaviour,  Interactable
+public class ButtonInteractable : MonoBehaviour,  IInteractable
 {
 
     public bool CanInteract()
     {
         Debug.Log("Button in range");
         return true;
+    }
+
+    public bool CanPickup()
+    {
+        return false;
     }
 
     public void Interact()

@@ -12,6 +12,11 @@ public class scr_OilBarrel : MonoBehaviour, IInteractable
         return true;
     }
 
+    public bool CanPickup()
+    {
+        return true;
+    }
+
     public void Interact()
     {
         Debug.Log("OilBarrel picked up :)");
