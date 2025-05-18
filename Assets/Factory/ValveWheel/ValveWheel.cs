@@ -11,16 +11,6 @@ public class ValveWheel : MonoBehaviour, IInteractable
         return true;
     }
 
-    public bool CanPickup()
-    {
-        return false;
-    }
-
-    public float GetOriginalYPosition()
-    {
-        return 0f;
-    }
-
     public void Interact()
     {
         if (mAnimator.speed == 0f)
