@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98fc84eee4b2d4f4dacc8906b986bc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mBarrelSpawnable: {fileID: 0}
-  mBarrelSpawnPoint: {fileID: 8801163301647851124}
+  mBarrelSpawnObject: {fileID: 585779374952594641, guid: 468fd07d8c4160a4e9d9875d4338613b, type: 3}
+  mBarrelSprite: {fileID: 8801163301647851124}
   mTweenPoint1: {fileID: 7607568513195508414}
   mTweenPoint2: {fileID: 5583798790256743442}
 --- !u!61 &4794511340447982269
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 9141009018538464945}
   - component: {fileID: 3802594041503326448}
   m_Layer: 0
-  m_Name: OilBarrelSpawnPoint
+  m_Name: OilBarrelSpriteToCopy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,6 +619,10 @@ PrefabInstance:
       propertyPath: mToggleable
       value: 
       objectReference: {fileID: 8801163301647851124}
+    - target: {fileID: 7807978472949530150, guid: be93f90088952e948aaa1ad1a19e4c2a, type: 3}
+      propertyPath: mToggleableObject
+      value: 
+      objectReference: {fileID: 2160493185755478191}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
