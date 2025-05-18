@@ -85,6 +85,13 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         mIsTrapped = true;
     }
+
+    public void BlowUp()
+    {
+        this.GetComponentInChildren<Explosion>().gameObject.SetActive(true);
+        this.GetComponentInChildren<Explosion>().Explode();
+        this.GetComponent<Explosion>().Explode();
+    }
 }
 
 public class EnemyFlyWeight

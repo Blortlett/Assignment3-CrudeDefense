@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class ExplosiveTrap : MonoBehaviour, IPickupable
+public class ExplosiveTrapController : MonoBehaviour, IPickupable
 {
-    private float mOriginalYPosition;
-    private bool mIsTrapUsed = false;
     public Animator mAnimator;
     private const string TriggerTrapName = "TrapTriggered";
+    private bool mIsTrapUsed = false;
+
+    const bool mCanPickup = true;
+    private float mOriginalYPosition;
+
     private List<GameObject> mOverlappingObjects = new List<GameObject>();
 
     public bool CanPickup()
     {
-        return true;
-    }
-
-    public float GetOriginalYPosition()
-    {
-        return mOriginalYPosition;
+        return mCanPickup;
     }
 
     public GameObject Pickup()
@@ -29,6 +28,11 @@ public class ExplosiveTrap : MonoBehaviour, IPickupable
     public void PutDown()
     {
         mAnimator.SetBool(TriggerTrapName, false);  //Change animation to normal idle state
+    }
+
+    public float GetOriginalYPosition()
+    {
+        return mOriginalYPosition;
     }
 
     private void Awake()
@@ -47,7 +51,7 @@ public class ExplosiveTrap : MonoBehaviour, IPickupable
     {
         if (!mIsTrapUsed)
         {
-            foreach (GameObject Object in mOverlappingObjects)   //For each overlapping object
+            foreach (GameObject Object in mOverlappingObjects.ToList())   //For each overlapping object
             {
                 IEnemy EnemyScript = Object.GetComponent<IEnemy>();    //Get enemy script
 
@@ -55,8 +59,10 @@ public class ExplosiveTrap : MonoBehaviour, IPickupable
                 {
                     mIsTrapUsed = true;
                     EnemyScript.Trap();
-                    mAnimator.SetBool(TriggerTrapName, true);   //Change animation to triggered state
 
+                    //mAnimator.SetBool(TriggerTrapName, true);   //Change animation to triggered state
+                    EnemyScript.BlowUp();
+                    this.GetComponent<Explosion>().Explode();
                 }
             }
         }
@@ -73,5 +79,4 @@ public class ExplosiveTrap : MonoBehaviour, IPickupable
     {
         mOverlappingObjects.Remove(_Collider.gameObject);   //Remove from list
     }
-
 }

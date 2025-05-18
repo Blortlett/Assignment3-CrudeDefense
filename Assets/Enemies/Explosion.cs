@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
+    public List<SpriteRenderer> srs;
     private int mTileSize = 16; //Size of square pieces (in pixels)
-    private float mExplosionForce = 20f;
-    private float mFragmentLifetime = 3f;
-
-    private void Start()
-    {
-        Explode();
-    }
+    private float mExplosionForce = 60f;
+    private float mFragmentLifetime = 10f;
 
     public void Explode()
     {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        foreach(SpriteRenderer Image in srs.ToList())
+        {
+            ExplodeSingle(Image);
+        }
+    }
+
+    public void ExplodeSingle(SpriteRenderer sr)
+    {
+
         if (sr == null || sr.sprite == null)
         {
             Debug.LogError("No SpriteRenderer or sprite found!");
@@ -61,7 +66,7 @@ public class Explosion : MonoBehaviour
                 BoxCollider2D collider = tileObj.AddComponent<BoxCollider2D>();
                 collider.size = tileSprite.bounds.size;
 
-                rb.gravityScale = 0.1f;
+                rb.gravityScale = 0.5f;
                 Vector2 randomForce = Random.insideUnitCircle.normalized * mExplosionForce;
                 rb.AddForce(randomForce, ForceMode2D.Impulse);
 
@@ -69,6 +74,6 @@ public class Explosion : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }
