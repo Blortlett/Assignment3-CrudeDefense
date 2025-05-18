@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
 
                 if (HeldObject == null) //If not holding object
                 {
-
                     GameObject Object = FindFirstPickupableObject();      //Get object to pickup if there is one, else it is null
 
                     if (Object != null)   //If there is object to pick up
@@ -136,9 +135,12 @@ public class PlayerController : MonoBehaviour
                 IInteractable InteractableScript = Object.GetComponent<IInteractable>();
                 if (InteractableScript != null)
                 {
-                    InteractableScript.CanPickup();
-
-                    return Object;
+                    // Return object for pickup
+                    if(InteractableScript.CanPickup())
+                        return Object;
+                    // call Interact function
+                    if(InteractableScript.CanInteract())
+                        InteractableScript.Interact();
                 }
             }
         }
