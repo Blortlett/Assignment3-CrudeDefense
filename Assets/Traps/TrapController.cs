@@ -10,6 +10,8 @@ public class TrapController : MonoBehaviour, IPickupable
     const bool mCanPickup = true;
     private float mOriginalYPosition;
 
+    private List<GameObject> mOverlappingObjects = new List<GameObject>();
+
     public bool CanPickup()
     {
         return mCanPickup;
@@ -17,12 +19,12 @@ public class TrapController : MonoBehaviour, IPickupable
 
     public void Pickup()
     {
-        mAnimator.SetBool(TriggerTrapName, true);
+        mAnimator.SetBool(TriggerTrapName, true);   //Change animation to triggered state
     }
 
     public void PutDown()
     {
-        mAnimator.SetBool(TriggerTrapName, false);
+        mAnimator.SetBool(TriggerTrapName, false);  //Change animation to normal idle state
     }
 
     public float GetOriginalYPosition()
@@ -44,6 +46,27 @@ public class TrapController : MonoBehaviour, IPickupable
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (GameObject Object in mOverlappingObjects)   //For each overlapping object
+        {
+            IEnemy EnemyScript = Object.GetComponent<IEnemy>();    //Get enemy script
+
+            if (EnemyScript != null)    //If is enemy
+            {
+                EnemyScript.Trap();
+            }
+        }
+    }
+
+    //On overlap
+    private void OnTriggerEnter2D(Collider2D _Collider)
+    {
+        Debug.Log("sdfsd");
+        mOverlappingObjects.Add(_Collider.gameObject);  //Add to list
+    }
+
+    //On stop overlap
+    private void OnTriggerExit2D(Collider2D _Collider)
+    {
+        mOverlappingObjects.Remove(_Collider.gameObject);   //Remove from list
     }
 }

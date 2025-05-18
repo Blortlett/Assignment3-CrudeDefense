@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private bool InteractButtonPressed = false;
 
-    private List<GameObject> OverlappingObjects = new List<GameObject>();
+    private List<GameObject> mOverlappingObjects = new List<GameObject>();
 
     private void Awake()
     {
@@ -135,9 +135,9 @@ public class PlayerController : MonoBehaviour
 
     GameObject FindFirstPickupableObject()
     {
-        if (OverlappingObjects.Count != 0)  //If player is overlapping something
+        if (mOverlappingObjects.Count != 0)  //If player is overlapping something
         {
-            foreach (GameObject Object in OverlappingObjects)   //For each overlapping object
+            foreach (GameObject Object in mOverlappingObjects)   //For each overlapping object
             {
                 IPickupable PickupableScript = Object.GetComponent<IPickupable>();    //Get pickupable script
                 IInteractable InteractableScript = Object.GetComponent<IInteractable>();    //Get interactable script
@@ -165,13 +165,13 @@ public class PlayerController : MonoBehaviour
     //On overlap
     private void OnTriggerEnter2D(Collider2D _Collider)
     {
-        OverlappingObjects.Add(_Collider.gameObject);  //Add to list
+        mOverlappingObjects.Add(_Collider.gameObject);  //Add to list
     }
 
     //On stop overlap
     private void OnTriggerExit2D(Collider2D _Collider)
     {
-        OverlappingObjects.Remove(_Collider.gameObject);   //Remove from list
+        mOverlappingObjects.Remove(_Collider.gameObject);   //Remove from list
     }
 
 }
