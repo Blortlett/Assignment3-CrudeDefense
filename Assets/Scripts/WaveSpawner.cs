@@ -55,12 +55,12 @@ public class WaveSpawner : MonoBehaviour
         eEnemyTypes randomEnemyType = (eEnemyTypes)Random.Range(0, System.Enum.GetValues(typeof(eEnemyTypes)).Length); // Get random enemy from enemy types
 
         // Spawn the enemy either left or right of screen
-        Vector2 spawnPosition;
+        Vector3 spawnPosition;
         float randomX = Random.Range(0, 2);
         if (randomX == 1)
-            spawnPosition = new Vector2(10f, 3f); // spawn right of screen
+            spawnPosition = new Vector3(10f, -3.247f, -1); // spawn right of screen
         else
-            spawnPosition = new Vector2(-10f, 3f); // spawn left of screen
+            spawnPosition = new Vector3(-10f, -3.247f, -1); // spawn left of screen
 
         // Instantiate enemy
         GameObject enemy = Instantiate(mEnemyPrefab, spawnPosition, Quaternion.identity);

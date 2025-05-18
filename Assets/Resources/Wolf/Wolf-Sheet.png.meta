@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WolfSprite-Sheet_0
+      name: Wolf-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88382711354b7e541b8eda0be8a54bfb
-      internalID: -594597768
+      spriteID: 4274f44ef130d9d48a08b3ca349e3a48
+      internalID: 1635214328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WolfSprite-Sheet_1
+      name: Wolf-Sheet_1
       rect:
         serializedVersion: 2
         x: 150
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6de180448d91c9d47806b4cadfbd5ef8
-      internalID: -1898901688
+      spriteID: 2af28606cecaa7943b768c2a0aa752a2
+      internalID: -1625093719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WolfSprite-Sheet_2
+      name: Wolf-Sheet_2
       rect:
         serializedVersion: 2
         x: 300
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 987632188cd7f9444be8b32e9503aced
-      internalID: 809945360
+      spriteID: 9085b1b1491ab8b4e9822c5e5f5c549f
+      internalID: -1080027358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WolfSprite-Sheet_3
+      name: Wolf-Sheet_3
       rect:
         serializedVersion: 2
         x: 450
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3e629aa87bdda443821a443c9cc2c38
-      internalID: -1154687855
+      spriteID: 592be4d750a636e4998ae8b50ab8f90d
+      internalID: -1073456423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WolfSprite-Sheet_4
+      name: Wolf-Sheet_4
       rect:
         serializedVersion: 2
         x: 600
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06c0c6d9517f592478c7e465475ba233
-      internalID: -1751536246
+      spriteID: 3e678dc0348e89248b8961a169c06dd9
+      internalID: -623844406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WolfSprite-Sheet_5
+      name: Wolf-Sheet_5
       rect:
         serializedVersion: 2
         x: 750
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ada6aa813088dfa4d8824f54dac7ce6e
-      internalID: 1887011901
+      spriteID: 01c8fca7d948a05409daae9becdd446d
+      internalID: 1237260779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WolfSprite-Sheet_6
+      name: Wolf-Sheet_6
       rect:
         serializedVersion: 2
         x: 900
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a84a778b412136e4e87a7eb14d3c7738
-      internalID: -233120892
+      spriteID: d2d4696454736ad4aac1387d9b80a1d0
+      internalID: -783795065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WolfSprite-Sheet_7
+      name: Wolf-Sheet_7
       rect:
         serializedVersion: 2
         x: 1050
@@ -258,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 980f42366af633845ad0ffe1d0e190ba
-      internalID: -1857847449
+      spriteID: 10150d26bfced644db61201dd6ed12c6
+      internalID: 1069669258
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WolfSprite-Sheet_8
+      name: Wolf-Sheet_8
       rect:
         serializedVersion: 2
         x: 1200
@@ -279,8 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06162c4d636083045ad3e530e0c91379
-      internalID: 772538801
+      spriteID: 0eb14107d0619d9489b33448323db827
+      internalID: -1091701250
       vertices: []
       indices: 
       edges: []
@@ -296,15 +296,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WolfSprite-Sheet_0: -594597768
-      WolfSprite-Sheet_1: -1898901688
-      WolfSprite-Sheet_2: 809945360
-      WolfSprite-Sheet_3: -1154687855
-      WolfSprite-Sheet_4: -1751536246
-      WolfSprite-Sheet_5: 1887011901
-      WolfSprite-Sheet_6: -233120892
-      WolfSprite-Sheet_7: -1857847449
-      WolfSprite-Sheet_8: 772538801
+      Wolf-Sheet_0: 1635214328
+      Wolf-Sheet_1: -1625093719
+      Wolf-Sheet_2: -1080027358
+      Wolf-Sheet_3: -1073456423
+      Wolf-Sheet_4: -623844406
+      Wolf-Sheet_5: 1237260779
+      Wolf-Sheet_6: -783795065
+      Wolf-Sheet_7: 1069669258
+      Wolf-Sheet_8: -1091701250
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
