@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
-public class BarrelSpawner : MonoBehaviour
+public class BarrelSpawner : MonoBehaviour, IPickupable
 {
+    [SerializeField] GameObject mBarrelSpawnable;
     [SerializeField] GameObject mBarrelSpawnPoint;
     [SerializeField] Transform mTweenPoint1;
     [SerializeField] Transform mTweenPoint2;
@@ -15,6 +17,8 @@ public class BarrelSpawner : MonoBehaviour
 
     private GameObject mpSpawnedBarrel = null;
 
+    private bool mIsBarrelReadyForPickup = false;
+
 
 
     void Start()
@@ -24,7 +28,11 @@ public class BarrelSpawner : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("LerpTime: " + mLerpTime);
+        if (mpSpawnedBarrel == null)
+            return;
+
+        //Debug.Log("LerpTime: " + mLerpTime);
+
         // Lerp Barrel to first point (Barrel falls out of machine)
         if (!mBarrelReachedPoint1)
         {
@@ -44,13 +52,40 @@ public class BarrelSpawner : MonoBehaviour
         {
             mLerpTime += Time.deltaTime; // Increase lerp time for calculation below
             float TweenXPos = Mathf.Lerp(mpSpawnedBarrel.transform.position.x, mTweenPoint2.position.x, mLerpTime); // Use lerp to calculate barrel X position
-            mpSpawnedBarrel.transform.position = new Vector3(TweenXPos, mpSpawnedBarrel.transform.position.y , 0f); // Apply lerp
+            mpSpawnedBarrel.transform.position = new Vector3(TweenXPos, mpSpawnedBarrel.transform.position.y, 0f); // Apply lerp
             if (mLerpTime >= 1f)
             {
                 // Reset animator parameters
                 mBarrelReachedPoint2 = true; // set track animation bool to complete so we don't repeat above code
                 mLerpTime = 0f; // reset animation timer
+                mIsBarrelReadyForPickup = true; // This bool lets pickup barrel code get executed
             }
         }
+    }
+
+    public bool CanPickup()
+    {
+        if (mIsBarrelReadyForPickup)
+            return true;
+        else
+            return false;
+    }
+
+    public void Pickup()
+    {
+        Destroy(mpSpawnedBarrel);
+        mpSpawnedBarrel = null;
+        GameObject spawnedBarrel = Instantiate(mBarrelSpawnPoint, mBarrelSpawnPoint.transform.position, mBarrelSpawnPoint.transform.rotation);
+        return spawnedBarrel;
+    }
+
+    public void PutDown()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public float GetOriginalYPosition()
+    {
+        throw new System.NotImplementedException();
     }
 }
