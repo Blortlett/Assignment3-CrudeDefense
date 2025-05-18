@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3036778355670820639}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.426, z: -1}
+  m_LocalPosition: {x: 0, y: 2.426, z: -0.3}
   m_LocalScale: {x: 0.5565, y: 0.5565, z: 0.5565}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494858641563621833}
   - component: {fileID: 4153770308082186400}
+  - component: {fileID: 7807978472949530150}
   m_Layer: 0
   m_Name: ButtonInteract
   m_TagString: Untagged
@@ -194,9 +195,9 @@ Transform:
   m_GameObject: {fileID: 6254975746047192018}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.61851, z: -0.19715}
-  m_LocalScale: {x: 0.5669, y: 0.5669, z: 0.5669}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0.61851, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4302150901829334507}
   - {fileID: 5284422436544867821}
@@ -248,6 +249,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.1282773, y: 4.5445814}
   m_EdgeRadius: 0
+--- !u!114 &7807978472949530150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254975746047192018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878a27f9b123b5c458fb2d3c4064e00c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mButtonSprite: {fileID: 964335881416228531}
+  mUnpressedButtonColor: {r: 0.90588236, g: 0.09803922, b: 0.09803922, a: 1}
+  mPressedButtonColor: {r: 0.41509432, g: 0.06069775, b: 0.06069775, a: 1}
 --- !u!1 &7353884457356893790
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +291,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.3043, z: 0}
-  m_LocalScale: {x: 1, y: 3.6087, z: 1}
+  m_LocalScale: {x: 0.65, y: 3.1576126, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1494858641563621833}

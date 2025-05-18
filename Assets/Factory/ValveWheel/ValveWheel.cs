@@ -23,8 +23,15 @@ public class ValveWheel : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log("Turning Valve Wheel");
-        mAnimator.speed = 1;
+        if (mAnimator.speed == 0f)
+        {
+            Debug.Log("Turning Valve Wheel");
+            mAnimator.speed = 1f;
+        } else
+        {
+            Debug.Log("Stop turning Valve Wheel");
+            mAnimator.speed = 0f;
+        }
     }
 
     // Start is called before the first frame update
