@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    private int mTileSize = 8; //Size of square pieces (in pixels)
-    private float mExplosionForce = 5f;
+    private int mTileSize = 16; //Size of square pieces (in pixels)
+    private float mExplosionForce = 20f;
     private float mFragmentLifetime = 3f;
 
     private void Start()
@@ -57,6 +57,11 @@ public class Explosion : MonoBehaviour
                 tileSr.sortingOrder = sr.sortingOrder;
 
                 Rigidbody2D rb = tileObj.AddComponent<Rigidbody2D>();
+
+                BoxCollider2D collider = tileObj.AddComponent<BoxCollider2D>();
+                collider.size = tileSprite.bounds.size;
+
+                rb.gravityScale = 0.1f;
                 Vector2 randomForce = Random.insideUnitCircle.normalized * mExplosionForce;
                 rb.AddForce(randomForce, ForceMode2D.Impulse);
 
