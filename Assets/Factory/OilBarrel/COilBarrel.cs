@@ -12,8 +12,9 @@ public class COilBarrel : MonoBehaviour , IPickupable
         return mCanPickup;
     }
 
-    public void Pickup()
+    public GameObject Pickup()
     {
+        return gameObject;
     }
 
     public void PutDown()

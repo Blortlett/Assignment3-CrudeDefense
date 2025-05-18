@@ -20,9 +20,10 @@ public class ExplosiveTrap : MonoBehaviour, IPickupable
         return mOriginalYPosition;
     }
 
-    public void Pickup()
+    public GameObject Pickup()
     {
         mAnimator.SetBool(TriggerTrapName, true);   //Change animation to triggered state
+        return gameObject;
     }
 
     public void PutDown()

@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
                     //Return object for pickup
                     if (PickupableScript.CanPickup())
                     {
-                        return Object;
+                        return PickupableScript.Pickup();
                     }
                 }
                 else if (InteractableScript != null)

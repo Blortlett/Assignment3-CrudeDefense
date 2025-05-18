@@ -18,9 +18,10 @@ public class TrapController : MonoBehaviour, IPickupable
         return mCanPickup;
     }
 
-    public void Pickup()
+    public GameObject Pickup()
     {
         mAnimator.SetBool(TriggerTrapName, true);   //Change animation to triggered state
+        return gameObject;
     }
 
     public void PutDown()

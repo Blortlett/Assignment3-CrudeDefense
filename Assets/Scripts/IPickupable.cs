@@ -3,7 +3,7 @@ using UnityEngine;
 public interface IPickupable
 {
     public bool CanPickup();
-    public void Pickup();
+    public GameObject Pickup();
     public void PutDown();
 
     public float GetOriginalYPosition();

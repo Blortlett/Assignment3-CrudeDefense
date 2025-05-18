@@ -74,13 +74,13 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable
             return false;
     }
 
-    public void Pickup()
+    public GameObject Pickup()
     {
         Destroy(mpAnimatedBarrelSprite);
         mpAnimatedBarrelSprite = null;
         mIsMachineFull = false;
         GameObject spawnedBarrel = Instantiate(mBarrelSpawnPoint, mBarrelSpawnPoint.transform.position, mBarrelSpawnPoint.transform.rotation);
-        //return spawnedBarrel;
+        return spawnedBarrel;
     }
 
     public void PutDown()
