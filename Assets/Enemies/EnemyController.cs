@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IEnemy
 {
     [SerializeField] private Animator mAnimator;
     [SerializeField] private SpriteRenderer mSpriteRenderer;
@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
 
     private Vector3 mFaceLeftScale = new Vector3(1,1,1);
     private Vector3 mFaceRightScale = new Vector3(-1,1,1);
+
+
+    bool mIsTrapped = false;
 
     void Start()
     {
@@ -29,7 +32,10 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(mMovementDirection * mpFlyweight.mfMoveSpeed * Time.deltaTime);
+        if (!mIsTrapped)
+        {
+            transform.Translate(mMovementDirection * mpFlyweight.mfMoveSpeed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -73,6 +79,11 @@ public class Enemy : MonoBehaviour
         {
             transform.localScale = mFaceLeftScale;
         }
+    }
+
+    public void Trap()
+    {
+        mIsTrapped = true;
     }
 }
 
