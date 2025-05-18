@@ -63,8 +63,8 @@ public class Explosion : MonoBehaviour
 
                 Rigidbody2D rb = tileObj.AddComponent<Rigidbody2D>();
 
-                BoxCollider2D collider = tileObj.AddComponent<BoxCollider2D>();
-                collider.size = tileSprite.bounds.size;
+                CircleCollider2D collider = tileObj.AddComponent<CircleCollider2D>();
+                collider.radius = tileSprite.bounds.size.x / 2;
 
                 rb.gravityScale = 0.5f;
                 Vector2 randomForce = Random.insideUnitCircle.normalized * mExplosionForce;
