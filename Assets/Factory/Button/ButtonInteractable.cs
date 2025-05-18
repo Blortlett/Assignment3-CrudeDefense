@@ -16,11 +16,6 @@ public class ButtonInteractable : MonoBehaviour,  IInteractable
         return true;
     }
 
-    public bool CanPickup()
-    {
-        return false;
-    }
-
     public void Interact()
     {
         if (mButtonPressedTimer <= 0f)
@@ -29,11 +24,6 @@ public class ButtonInteractable : MonoBehaviour,  IInteractable
             mButtonPressedTimer = mButtonPressedTimeMax;
             mButtonSprite.color = mPressedButtonColor;
         }
-    }
-
-    public float GetOriginalYPosition()
-    {
-        return 0;
     }
 
     void Start()

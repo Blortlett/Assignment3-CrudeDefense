@@ -80,10 +80,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             PlayerInput += 1;
+            transform.localScale = new Vector3(1, 1, 1);    //Make player face right direction
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))    //Make player face left direction
         {
             PlayerInput -= 1;
+            transform.localScale = new Vector3(-1, 1, 1);
         }
 
 
@@ -114,33 +116,45 @@ public class PlayerController : MonoBehaviour
 
     private void PickupObject(GameObject _Object)
     {
-        HeldObject = _Object;
+        HeldObject = _Object;   //Set held object
+        IPickupable PickupableScript = HeldObject.GetComponent<IPickupable>();
+        PickupableScript.Pickup();
 
-        HeldObject.transform.position = GrabLocation.transform.position;
+        HeldObject.transform.position = GrabLocation.transform.position;    //Move object to the grab position
     }
 
     private void PutdownObject()
     {
-        HeldObject.transform.position = new Vector3(HeldObject.transform.position.x, HeldObject.GetComponent<IInteractable>().GetOriginalYPosition(), HeldObject.transform.position.z);
-        HeldObject = null;
+        IPickupable PickupableScript = HeldObject.GetComponent<IPickupable>();
+        PickupableScript.PutDown();
+
+        HeldObject.transform.position = new Vector3(HeldObject.transform.position.x, HeldObject.GetComponent<IPickupable>().GetOriginalYPosition(), HeldObject.transform.position.z); //Put object back on ground
+        HeldObject = null;  //Playing is no longer holding object
 
     }
 
     GameObject FindFirstPickupableObject()
     {
-        if (OverlappingObjects.Count != 0)
+        if (OverlappingObjects.Count != 0)  //If player is overlapping something
         {
             foreach (GameObject Object in OverlappingObjects)   //For each overlapping object
             {
-                IInteractable InteractableScript = Object.GetComponent<IInteractable>();
-                if (InteractableScript != null)
+                IPickupable PickupableScript = Object.GetComponent<IPickupable>();    //Get pickupable script
+                IInteractable InteractableScript = Object.GetComponent<IInteractable>();    //Get interactable script
+                if (PickupableScript != null) //If object has interactable scrip
                 {
-                    // Return object for pickup
-                    if(InteractableScript.CanPickup())
+                    //Return object for pickup
+                    if (PickupableScript.CanPickup())
+                    {
                         return Object;
-                    // call Interact function
-                    if(InteractableScript.CanInteract())
-                        InteractableScript.Interact();
+                    }
+                }
+                else if (InteractableScript != null)
+                {
+                    if (InteractableScript.CanInteract())    //If object is interactable and can interact
+                    {
+                        InteractableScript.Interact();  //Call Interact function
+                    }
                 }
             }
         }
