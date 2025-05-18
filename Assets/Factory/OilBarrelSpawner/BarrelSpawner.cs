@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable
 {
-    [SerializeField] GameObject mBarrelSpawnable;
-    [SerializeField] GameObject mBarrelSpawnPoint;
+    [SerializeField] GameObject mBarrelSpawnObject;
+    [SerializeField] GameObject mBarrelSprite;
     [SerializeField] Transform mTweenPoint1;
     [SerializeField] Transform mTweenPoint2;
     private float mLerpTime = 0f;
@@ -39,7 +39,7 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable
         {
             mLerpTime += Time.deltaTime / 2f; // Increase lerp time for calculation below
             float TweenYPos = Mathf.Lerp(mpAnimatedBarrelSprite.transform.position.y, mTweenPoint1.position.y, mLerpTime); // Use lerp to calculate barrel Y position
-            mpAnimatedBarrelSprite.transform.position = new Vector3(mBarrelSpawnPoint.transform.position.x, TweenYPos, 0f); // Apply lerp
+            mpAnimatedBarrelSprite.transform.position = new Vector3(mBarrelSprite.transform.position.x, TweenYPos, 0f); // Apply lerp
             if (mLerpTime >= 1f)
             {
                 // Reset animator parameters
@@ -78,8 +78,8 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable
     {
         Destroy(mpAnimatedBarrelSprite);
         mpAnimatedBarrelSprite = null;
-        mIsMachineFull = false;
-        GameObject spawnedBarrel = Instantiate(mBarrelSpawnPoint, mBarrelSpawnPoint.transform.position, mBarrelSpawnPoint.transform.rotation);
+        ResetMachine();
+        GameObject spawnedBarrel = Instantiate(mBarrelSpawnObject, mBarrelSprite.transform.position, mBarrelSprite.transform.rotation);
         return spawnedBarrel;
     }
 
@@ -95,11 +95,22 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable
 
     public void OnButtonPress()
     {
+        Debug.Log("Barrel machine heard button press");
+
         if (mIsMachineFull)
             return; // If machine already occupied - Do nothing
 
         // Create barrel sprite to animate the machine with
-        mpAnimatedBarrelSprite = Instantiate(mBarrelSpawnPoint, mBarrelSpawnPoint.transform.position, mBarrelSpawnPoint.transform.rotation);
+        mpAnimatedBarrelSprite = Instantiate(mBarrelSprite, mBarrelSprite.transform.position, mBarrelSprite.transform.rotation);
         mIsMachineFull = true;
+    }
+
+    private void ResetMachine()
+    {
+        mBarrelReachedPoint1 = false;
+        mBarrelReachedPoint2 = false;
+        mIsMachineFull = false;
+        mIsBarrelReadyForPickup = false;
+        mLerpTime = 0f;
     }
 }
