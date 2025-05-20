@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour, IEnemy
     private Vector3 mFaceRightScale = new Vector3(-1,1,1);
 
 
+
     bool mIsTrapped = false;
 
     void Start()
