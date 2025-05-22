@@ -97,9 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cd65a77e0c12d458653d4adc0ed759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  srs:
-  - {fileID: 7973602188141098277}
-  - {fileID: 7150513291522670593}
+  mSpriteRendererList: []
 --- !u!1 &7933303545807287316
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cd65a77e0c12d458653d4adc0ed759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  srs:
-  - {fileID: 7150513291522670593}
+  mSpriteRendererList:
   - {fileID: 7973602188141098277}
+  - {fileID: 7150513291522670593}
