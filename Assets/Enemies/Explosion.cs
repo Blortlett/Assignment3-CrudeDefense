@@ -8,7 +8,7 @@ public class Explosion : MonoBehaviour
     public List<SpriteRenderer> srs;
     private int mTileSize = 16; //Size of square pieces (in pixels)
     private float mExplosionForce = 60f;
-    private float mFragmentLifetime = 10f;
+    private float mFragmentLifetime = 6f;
 
     public void Explode()
     {
