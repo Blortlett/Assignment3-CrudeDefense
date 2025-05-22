@@ -79,7 +79,7 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable
         Destroy(mpAnimatedBarrelSprite);
         mpAnimatedBarrelSprite = null;
         ResetMachine();
-        GameObject spawnedBarrel = Instantiate(mBarrelSpawnObject, mBarrelSprite.transform.position, mBarrelSprite.transform.rotation);
+        GameObject spawnedBarrel = Instantiate(mBarrelSpawnObject, new Vector3(mBarrelSprite.transform.position.x, -2.716174f, mBarrelSprite.transform.position.z), mBarrelSprite.transform.rotation);
         return spawnedBarrel;
     }
 
