@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     //Pickup variables
     public GameObject GrabLocation;
     private GameObject HeldObject = null;
+    public GameObject PlayerSprite = null;
     private Animator PlayerAnimator;
 
 
@@ -81,12 +82,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             PlayerInput += 1;
-            transform.localScale = new Vector3(1, 1, 1);    //Make player face right direction
+            PlayerSprite.transform.localScale = new Vector3(Mathf.Abs(PlayerSprite.transform.localScale.x), PlayerSprite.transform.localScale.y, PlayerSprite.transform.localScale.z);    //Make player face right direction
         }
         if (Input.GetKey(KeyCode.A))    //Make player face left direction
         {
             PlayerInput -= 1;
-            transform.localScale = new Vector3(-1, 1, 1);
+            PlayerSprite.transform.localScale = new Vector3(Mathf.Abs(PlayerSprite.transform.localScale.x) * -1, PlayerSprite.transform.localScale.y, PlayerSprite.transform.localScale.z);
         }
 
 
