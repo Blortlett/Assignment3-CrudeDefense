@@ -52,6 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrabLocation: {fileID: 3007205830756335235}
   PlayerSprite: {fileID: 5477162094863110006}
+  MoveAcceleration: 8
+  MaxMoveSpeed: 4
 --- !u!50 &5578654744372925570
 Rigidbody2D:
   serializedVersion: 4
