@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mOilLevelSlider: {fileID: 5176360242610755199}
+  mOilLevelSprite: {fileID: 0}
   mMachineRunning: 0
 --- !u!1001 &6894152103697750315
 PrefabInstance:
@@ -291,11 +292,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077325974640085525, guid: 8320bc360b0409541bcbd5c9fab89f99, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.97
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 9077325974640085525, guid: 8320bc360b0409541bcbd5c9fab89f99, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.48
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 9077325974640085525, guid: 8320bc360b0409541bcbd5c9fab89f99, type: 3}
       propertyPath: m_LocalPosition.z

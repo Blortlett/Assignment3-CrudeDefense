@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D Rb; //Players rigid body for movement and collision
 
-    private float MoveAcceleration = 30;    //Character move speed
-    private float MaxMoveSpeed = 10;    //Character move speed
+    [SerializeField] private float MoveAcceleration = 20f;    //Character move speed
+    [SerializeField]  private float MaxMoveSpeed = 15f;    //Character move speed
     private int LastPlayerMoveInput = 0;
 
     private bool InteractButtonPressed = false;

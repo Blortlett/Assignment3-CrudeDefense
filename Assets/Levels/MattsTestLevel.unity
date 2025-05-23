@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OilStorageMachine
       objectReference: {fileID: 0}
+    - target: {fileID: 7269478418066385606, guid: 78163b5a32b6dc74f8dd52c922972587, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.64
+      objectReference: {fileID: 0}
     - target: {fileID: 8165045323614244384, guid: 78163b5a32b6dc74f8dd52c922972587, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
