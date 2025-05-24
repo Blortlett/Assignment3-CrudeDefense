@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class ValveWheel : MonoBehaviour, IInteractable
 {
+    // How much the turnpipe is turned
+    float mTurnpipeCurrentOpenAmount = 0f;
+    float mTurnpipeOpenMax = 100f;
+
+    int TurnpipeTurnDirection = 0; // -1 for closing direction. +1 for opening direction
+    bool TurnpipeOpen = false;
+
+
     // Prefab's own things
     [SerializeField] private Animator mAnimator;
 
@@ -26,19 +34,20 @@ public class ValveWheel : MonoBehaviour, IInteractable
         {
             mAnimator.speed = 0f;
         }
+
         // Make the Valve wheel do something
         if (mToggleableScript != null)
         {
             mToggleableScript.OnButtonPress();
         }
-        else Debug.Log("No Toggleable present");
+        else Debug.Log("No Toggleable present"); // Error detection
     }
 
     // Start is called before the first frame update
     void Start()
     {
         mToggleableScript = mToggleableObject.GetComponent<IButtonable>();
-;        mAnimator.speed = 0;
+;       mAnimator.speed = 0;
     }
 
     // Update is called once per frame

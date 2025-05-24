@@ -34,13 +34,15 @@ public class PressurePlateScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Pressurepad Triggered");
             mIsPressed = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        mIsPressed = false;
+        if (collision.CompareTag("Player"))
+        {
+            mIsPressed = false;
+        }
     }
 }
