@@ -1,23 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class ValveWheel : MonoBehaviour, IInteractable
 {
+    enum WheelState
+    {
+        WHEELSTATE_Closed,
+        WHEELSTATE_Opening,
+        WHEELSTATE_Open,
+        WHEELSTATE_Closing
+    }
+
+    // AnimationSpeeds
+    float WheelForwardAnimSpeed = 1f;
+    float WheelBackwardAnimSpeed = -0.5f;
+
     // How much the turnpipe is turned
     float mTurnpipeCurrentOpenAmount = 0f;
-    float mTurnpipeOpenMax = 100f;
+    const float mTurnpipeMaxOpen = 100f;
+    [SerializeField] float mTurnpipeOpeningSpeed = 2f;
+    WheelState mCurrentWheelState = WheelState.WHEELSTATE_Closed;
 
-    int TurnpipeTurnDirection = 0; // -1 for closing direction. +1 for opening direction
-    bool TurnpipeOpen = false;
+    // Turnpipe stay open for timer
+    float mTurnPipeCurrentOpenTime = 0f;
+    [SerializeField] float mTurnPipeOpenTimeMax = 3f;
 
-
-    // Prefab's own things
+    // Prefab's own components
     [SerializeField] private Animator mAnimator;
 
     // Object's outside the prefab
-    [SerializeField] private GameObject mToggleableObject;
-    private IButtonable mToggleableScript;
+    [SerializeField] private GameObject mValveWheelableObject;
+    private IValveWheelable mValveWheelableScript;
 
     public bool CanInteract()
     {
@@ -26,33 +41,68 @@ public class ValveWheel : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (mAnimator.speed == 0f)
-        {
-            mAnimator.speed = 1f;
-            
-        } else
-        {
-            mAnimator.speed = 0f;
-        }
-
-        // Make the Valve wheel do something
-        if (mToggleableScript != null)
-        {
-            mToggleableScript.OnButtonPress();
-        }
-        else Debug.Log("No Toggleable present"); // Error detection
+        mCurrentWheelState = WheelState.WHEELSTATE_Opening;
+        mAnimator.speed = .7f;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        mToggleableScript = mToggleableObject.GetComponent<IButtonable>();
+        // Get script of object to fill with liquid
+        mValveWheelableScript = mValveWheelableObject.GetComponent<IValveWheelable>();
+        if (mValveWheelableScript == null)
+            throw new System.Exception("No ValveWheelable Script attached to me!!");
+        // set animator to not play on beginning
 ;       mAnimator.speed = 0;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        // Update silo - send in wheel open percentage for fill calculation
+        mValveWheelableScript.FillTank(mTurnpipeCurrentOpenAmount / mTurnpipeMaxOpen);
+
+        // Handle logic by wheel state
+        switch (mCurrentWheelState)
+        {
+            case WheelState.WHEELSTATE_Opening:
+                // set animator speed to forward
+                mAnimator.speed = WheelForwardAnimSpeed; 
+                // increase turnwheel open %   -- Opening animation should be playing here...
+                mTurnpipeCurrentOpenAmount += mTurnpipeOpeningSpeed;
+                // If turnwheel == max time, set state to open & timer to full
+                if (mTurnpipeCurrentOpenAmount >= mTurnpipeMaxOpen)
+                {
+                    mTurnPipeCurrentOpenTime = mTurnPipeOpenTimeMax; // reset timer for how long turnpipe should be open for
+                    mCurrentWheelState = WheelState.WHEELSTATE_Open; // Set state to open
+                }
+                break;
+
+            case WheelState.WHEELSTATE_Open:
+                // Set animator speed to stopped
+                mAnimator.speed = 0f;
+                // Wheel stays open only for a certain timer
+                mTurnPipeCurrentOpenTime -= Time.fixedDeltaTime;
+                // If timer hit zero - turnpipe closed
+                if (mTurnPipeCurrentOpenTime <= 0f)
+                {
+                    mCurrentWheelState = WheelState.WHEELSTATE_Closing;  // Set state to closing
+                }
+                break;
+
+            case WheelState.WHEELSTATE_Closing:
+                // Set animation to play backwards slowly
+                mAnimator.speed = WheelBackwardAnimSpeed;
+                // decrease turnwheel open %   -- Closing animation should be playing here...
+                mTurnpipeCurrentOpenAmount -= mTurnpipeOpeningSpeed;
+                // If wheel fully closes..
+                if (mTurnpipeCurrentOpenAmount <= 0f)
+                {
+                    // swap to closed state and stop animator
+                    mAnimator.speed = 0f;
+                    mCurrentWheelState = WheelState.WHEELSTATE_Closed;
+                }
+                break;
+        }
     }
 }

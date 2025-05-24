@@ -150,6 +150,18 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 456492735474345401, guid: 264c9a329f1a1334da3815f300841ce2, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.70980394
+      objectReference: {fileID: 0}
+    - target: {fileID: 456492735474345401, guid: 264c9a329f1a1334da3815f300841ce2, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.48627454
+      objectReference: {fileID: 0}
+    - target: {fileID: 456492735474345401, guid: 264c9a329f1a1334da3815f300841ce2, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.26666668
+      objectReference: {fileID: 0}
     - target: {fileID: 1244918681988123859, guid: 264c9a329f1a1334da3815f300841ce2, type: 3}
       propertyPath: m_SortingLayer
       value: 5
@@ -902,67 +914,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1062413575
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3548678892822227044, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_Name
-      value: BigValveWheel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728847157312667816, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014581426425372923, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
-      propertyPath: mToggleableObject
-      value: 
-      objectReference: {fileID: 1476244328}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cd385a10576f5504ca45b6ab34b101c2, type: 3}
 --- !u!1001 &1105536721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1202,11 +1153,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1476244328 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8140415120610457934, guid: 6e4fb9253a7c07f449422c796d008172, type: 3}
-  m_PrefabInstance: {fileID: 1105536721}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1579832016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,7 +1792,6 @@ SceneRoots:
   - {fileID: 700175671}
   - {fileID: 1999127735}
   - {fileID: 1105536721}
-  - {fileID: 1062413575}
   - {fileID: 1336010565}
   - {fileID: 108108168}
   - {fileID: 790023894}

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OilSiloScript : MonoBehaviour, IButtonable
+public class OilSiloScript : MonoBehaviour, IValveWheelable
 {
     // Oil level visuals
     [SerializeField] private Transform mOilLevelParent; // Reference to the oil level sprite
     private const float mMaxOilLevel = 100f;
     private float mCurrentOilLevel = 0f;
     // Rate at which the tank fills
-    [SerializeField] private const float mFillRate = 20f;
+    [SerializeField] private const float mFillRate = .1f;
     // Silo running/filling variables
     public bool mMachineRunning = false;
     // MaxGraphicSize
@@ -23,36 +23,26 @@ public class OilSiloScript : MonoBehaviour, IButtonable
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        TryFillOil();
         UpdateOilLevelVisual();
-    }
-
-    // This actually runs when wheel turns not on button press but we hacky out here
-    public void OnButtonPress()
-    { // Toggle machine running on and off
-        mMachineRunning = !mMachineRunning;
-    }
-
-    // function to run filling oil levels
-    private void TryFillOil()
-    {
-        if (!mMachineRunning) return; // If not filling oil dont worry about this function, just move on
-        if (mCurrentOilLevel > +mMaxOilLevel) return; // If tank already full exit function
-
-        Debug.Log("Filling Silo with oil");
-        mCurrentOilLevel += mFillRate * Time.deltaTime; // Raise tank oil percentage
     }
 
     private void UpdateOilLevelVisual()
     {
         if (mOilLevelParent != null) // error check
         {
-            // Set oil graphics size
+            // oil graphics size calculations
             float PercentFull = (mCurrentOilLevel / mMaxOilLevel);
-            float yLevel = 1 + (PercentFull * mMaxOilGraphicYScale);
+            float yLevel = 1 + (PercentFull * mMaxOilGraphicYScale); // 1 + () is here because we want some oil at bottom if 0
+            // Set oil graphics size
             mOilLevelParent.localScale = new Vector2(1, yLevel);
         }
+    }
+
+    public void FillTank(float WheelOpenPercent)
+    {
+        if (mCurrentOilLevel >= mMaxOilLevel) return;
+        mCurrentOilLevel += mFillRate * WheelOpenPercent;
     }
 }
