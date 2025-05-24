@@ -40,7 +40,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+        InteractGrab();
+    }
 
+    private void InteractGrab()
+    {
         if (Input.GetKey(KeyCode.E))    //If pressed E
         {
             if (!InteractButtonPressed)
