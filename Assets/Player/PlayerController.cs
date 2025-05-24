@@ -7,22 +7,22 @@ public class PlayerController : MonoBehaviour
     //Pickup variables
     public GameObject GrabLocation;
     private GameObject HeldObject = null;
+    private bool InteractButtonPressed = false;
+    private List<GameObject> mOverlappingObjects = new List<GameObject>();
+
+    // Player Components
     public GameObject PlayerSprite = null;
     private Animator PlayerAnimator;
-
-
-
-
-
     private Rigidbody2D Rb; //Players rigid body for movement and collision
 
+    // Move Values
     [SerializeField] private float MoveAcceleration = 20f;    //Character move speed
     [SerializeField]  private float MaxMoveSpeed = 15f;    //Character move speed
     private int LastPlayerMoveInput = 0;
 
-    private bool InteractButtonPressed = false;
+    // Jump values
+    [SerializeField] private float mJumpImpulse;
 
-    private List<GameObject> mOverlappingObjects = new List<GameObject>();
 
     private void Awake()
     {
@@ -41,6 +41,17 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         InteractGrab();
+        Jump();
+    }
+
+    private void Jump()
+    {
+        // implement jump here
+        // for now this will just handle y value - Matt
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Rb.AddForce(new Vector2(0, mJumpImpulse));
+        }
     }
 
     private void InteractGrab()
@@ -107,10 +118,10 @@ public class PlayerController : MonoBehaviour
                 XVelocity = 0;  //Set velocity to zero so character doesn't slide
             }
 
-            XVelocity += PlayerInput * MoveAcceleration * Time.deltaTime;   //Adds to velocity
+            XVelocity += PlayerInput * MoveAcceleration * Time.deltaTime;       //Adds to velocity
             XVelocity = Mathf.Clamp(XVelocity, -MaxMoveSpeed, MaxMoveSpeed);    //Clamps velocity between -max and max move speed
 
-            Rb.velocity = new Vector2(XVelocity, 0);  //Sets player velocity
+            Rb.velocity = new Vector2(XVelocity, Rb.velocity.y);  //Sets player velocity
         }
         else
         {

@@ -54,6 +54,7 @@ MonoBehaviour:
   PlayerSprite: {fileID: 5477162094863110006}
   MoveAcceleration: 8
   MaxMoveSpeed: 4
+  mJumpImpulse: 12
 --- !u!50 &5578654744372925570
 Rigidbody2D:
   serializedVersion: 4
@@ -69,7 +70,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 9
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,7 +111,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.82027054}
