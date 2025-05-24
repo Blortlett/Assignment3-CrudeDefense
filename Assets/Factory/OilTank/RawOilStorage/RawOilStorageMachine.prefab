@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 8165045323614244384}
   - component: {fileID: 3143548623363139362}
   m_Layer: 0
-  m_Name: OilStorageMachine
+  m_Name: RawOilStorageMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

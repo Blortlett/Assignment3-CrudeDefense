@@ -32,7 +32,10 @@ public class PressurePlateScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        mIsPressed = true;
+        if (collision.CompareTag("Player"))
+        {
+            mIsPressed = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
