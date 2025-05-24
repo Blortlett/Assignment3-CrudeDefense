@@ -210,10 +210,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5435083773129623798, guid: 264c9a329f1a1334da3815f300841ce2, type: 3}
-      propertyPath: MoveAcceleration
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 5955476395330450142, guid: 264c9a329f1a1334da3815f300841ce2, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -1563,7 +1559,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1613770851}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fb9d88115183a6045bd2196a266ce712, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

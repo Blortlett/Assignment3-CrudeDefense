@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
 
     // Move Values
     [SerializeField] private float MoveAcceleration = 20f;    //Character move speed
-    [SerializeField]  private float MaxMoveSpeed = 15f;    //Character move speed
+    [SerializeField] private float MaxMoveSpeed = 15f;    //Character move speed
+    [SerializeField] private float mXDrag = .1f;
     private int LastPlayerMoveInput = 0;
 
     // Jump values
@@ -126,7 +127,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             PlayerAnimator.SetBool("IsWalking", false);
-            Rb.drag = 100;  //Increases drag so character slows down
+            //Rb.drag = 100;  //Increases drag so character slows down
+            Rb.velocity *= new Vector2(mXDrag, 1);
         }
 
         LastPlayerMoveInput = PlayerInput;  //Sets last player move input

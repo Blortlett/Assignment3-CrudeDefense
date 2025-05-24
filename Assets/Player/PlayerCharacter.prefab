@@ -52,9 +52,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrabLocation: {fileID: 3007205830756335235}
   PlayerSprite: {fileID: 5477162094863110006}
-  MoveAcceleration: 8
+  MoveAcceleration: 50
   MaxMoveSpeed: 4
-  mJumpImpulse: 12
+  mXDrag: 0.1
+  mJumpImpulse: 800
 --- !u!50 &5578654744372925570
 Rigidbody2D:
   serializedVersion: 4
@@ -71,7 +72,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 9
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fb9d88115183a6045bd2196a266ce712, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -80,7 +81,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &4390039456840185503
 CapsuleCollider2D:
@@ -91,7 +92,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1930955099788904716}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fb9d88115183a6045bd2196a266ce712, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
