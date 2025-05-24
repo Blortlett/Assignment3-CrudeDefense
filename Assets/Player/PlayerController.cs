@@ -94,7 +94,6 @@ public class PlayerController : MonoBehaviour
         if (PlayerInput != 0)   //If player is inputing
         {
             PlayerAnimator.SetBool("IsWalking", true);
-            Debug.Log(PlayerAnimator.GetBool("IsWalking"));
             Rb.drag = 0;    //Player is frictionless
 
             float XVelocity = Rb.velocity.x;
@@ -112,7 +111,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             PlayerAnimator.SetBool("IsWalking", false);
-            Debug.Log(PlayerAnimator.GetBool("IsWalking"));
             Rb.drag = 100;  //Increases drag so character slows down
         }
 

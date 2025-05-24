@@ -8,8 +8,8 @@ public class PressurePlateScript : MonoBehaviour
 
     Collider2D mPressurePlateTrigger;
     bool mIsPressed;
-    Vector2 mButtonUnpressedPosition = new Vector2(0, 0.2539f);
-    Vector2 mButtonPressedPosition = new Vector2(0, 0);
+    [SerializeField] Transform mButtonUnpressedPosition;
+    [SerializeField] Transform mButtonPressedPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +22,11 @@ public class PressurePlateScript : MonoBehaviour
     {
         if (mIsPressed)
         {
-            mPressurePadGraphic.localPosition = mButtonPressedPosition;
+            mPressurePadGraphic.position = mButtonPressedPosition.position;
         }
         else // not pressed
         {
-            mPressurePadGraphic.localPosition = mButtonUnpressedPosition;
+            mPressurePadGraphic.position = mButtonUnpressedPosition.position;
         }
     }
 
@@ -34,6 +34,7 @@ public class PressurePlateScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log("Pressurepad Triggered");
             mIsPressed = true;
         }
     }

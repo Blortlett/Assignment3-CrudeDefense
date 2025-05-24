@@ -172,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5312835940483183611, guid: 264c9a329f1a1334da3815f300841ce2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.896866
+      value: 7.72
       objectReference: {fileID: 0}
     - target: {fileID: 5312835940483183611, guid: 264c9a329f1a1334da3815f300841ce2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -719,6 +719,10 @@ PrefabInstance:
     - target: {fileID: 4867008142565469731, guid: 6e4fb9253a7c07f449422c796d008172, type: 3}
       propertyPath: m_Name
       value: RefinedOilStorage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773597242947191855, guid: 6e4fb9253a7c07f449422c796d008172, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
