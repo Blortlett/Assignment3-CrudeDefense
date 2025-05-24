@@ -346,6 +346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3068557264184222465}
   - component: {fileID: 5286665301562071476}
+  - component: {fileID: -1312798545049661116}
   m_Layer: 0
   m_Name: Ladder
   m_TagString: Untagged
@@ -411,7 +412,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.6109505}
+  m_Offset: {x: 0.000000044703484, y: 1.6109505}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -422,8 +423,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.7982693}
+  m_Size: {x: 0.085879534, y: 2.7982693}
   m_EdgeRadius: 0
+--- !u!114 &-1312798545049661116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411245288379289502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e775e852efc2c48957530078b96eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mPlatformCollider: {fileID: 4411245288379289502}
 --- !u!1 &4471824386118661006
 GameObject:
   m_ObjectHideFlags: 0

@@ -56,6 +56,9 @@ MonoBehaviour:
   MaxMoveSpeed: 4
   mXDrag: 0.1
   mJumpImpulse: 800
+  mGravity: 9
+  mGrounded: 1
+  mLaderSpeed: 4
 --- !u!50 &5578654744372925570
 Rigidbody2D:
   serializedVersion: 4
