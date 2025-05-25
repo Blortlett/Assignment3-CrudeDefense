@@ -24,7 +24,6 @@ public class ButtonInteractable : MonoBehaviour,  IInteractable
         // Button animation code
         if (mButtonPressedTimer <= 0f)
         {
-            Debug.Log("Button pressed :)");
             mButtonPressedTimer = mButtonPressedTimeMax;
             mButtonSprite.color = mPressedButtonColor;
         }

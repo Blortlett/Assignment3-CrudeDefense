@@ -48,6 +48,8 @@ public class PressurePlateScript : MonoBehaviour
         if (collision.CompareTag("Player")) // only activate for player
         {
             mIsPressed = true;
+            // Trigger target script
+            mTargetTriggerableScript.PressurePlatePushed();
         }
     }
 

@@ -35,9 +35,12 @@ public class ValveWheel : MonoBehaviour, IInteractable
     // Prefab's own components
     [SerializeField] private Animator mAnimator;
 
-    // Object's outside the prefab
+    // Objects outside the prefab
     [SerializeField] private GameObject mValveWheelableObject;
     private IValveWheelable mValveWheelableScript;
+
+    // Progress Bar UI
+    [SerializeField] private ProgressBar mProgressBarScr;
 
     public bool CanInteract()
     {
@@ -57,8 +60,13 @@ public class ValveWheel : MonoBehaviour, IInteractable
         mValveWheelableScript = mValveWheelableObject.GetComponent<IValveWheelable>();
         if (mValveWheelableScript == null)
             throw new System.Exception("No ValveWheelable Script attached to me!!");
+        // Check Progress bar script is attached
+        if (mProgressBarScr == null)
+            throw new System.Exception("No ValveWheelable Script attached to me!!");
+        else // Update Progressbar UI
+            mProgressBarScr.SetProgress(mTurnpipeCurrentOpenAmount);
         // set animator to not play on beginning
-;       mAnimator.speed = 0;
+        mAnimator.speed = 0;
     }
 
     // Update is called once per frame
@@ -77,6 +85,8 @@ public class ValveWheel : MonoBehaviour, IInteractable
                 mAnimator.speed = WheelForwardAnimSpeed; 
                 // increase turnwheel open %   -- Opening animation should be playing here...
                 mTurnpipeCurrentOpenAmount += mTurnpipeOpeningSpeed;
+                // Update Progressbar UI
+                mProgressBarScr.SetProgress(mTurnpipeCurrentOpenAmount);
                 // If turnwheel == max time, set state to open & timer to full
                 if (mTurnpipeCurrentOpenAmount >= mTurnpipeMaxOpen)
                 {
@@ -104,6 +114,8 @@ public class ValveWheel : MonoBehaviour, IInteractable
                 mAnimator.speed = WheelBackwardAnimSpeed;
                 // decrease turnwheel open %   -- Closing animation should be playing here...
                 mTurnpipeCurrentOpenAmount -= mTurnpipeClosingSpeed;
+                // Update Progressbar UI
+                mProgressBarScr.SetProgress(mTurnpipeCurrentOpenAmount);
                 // If wheel fully closes..
                 if (mTurnpipeCurrentOpenAmount <= 0f)
                 {
