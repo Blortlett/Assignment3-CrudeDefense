@@ -26,10 +26,12 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
     // Machine got a barrel in it? variables
     private bool mIsBarrelReadyForPickup = false;
     private bool mIsMachineFull = false;
-    // Barrel full variables
+    // Barrel fill variables
     private int mBarrelCurrentFullness = 0;
     private const int mBarrelMaxFullness = 3;
     private bool mBarrelFull = false;
+    // Fill barrel particle feedback
+    [SerializeField] private ParticleSystem mFillBarrelParticles;
 
 
     void Start()
@@ -118,11 +120,11 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
 
     public void PressurePlatePushed()
     {
-        Debug.Log("Pressure plate pushed");
+        mFillBarrelParticles.Play();
+
         // Check barrel is in ready to fill position
         if (mBarrelReachedPoint2 && !mBarrelReachedPoint3)
         {
-            Debug.Log("Filling Barrel here");
             // Fill barrel with oil
             mBarrelCurrentFullness++;
         }
@@ -130,7 +132,6 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
         // Check if barrel is full
         if (mBarrelCurrentFullness >= mBarrelMaxFullness)
         {
-            Debug.Log("Barrel full");
             mBarrelFull = true;
         }
     }
