@@ -8,13 +8,24 @@ public class PressurePlateScript : MonoBehaviour
 
     Collider2D mPressurePlateTrigger;
     bool mIsPressed;
-    Vector2 mButtonUnpressedPosition = new Vector2(0, 0.2539f);
-    Vector2 mButtonPressedPosition = new Vector2(0, 0);
+    [SerializeField] Transform mButtonUnpressedPosition;
+    [SerializeField] Transform mButtonPressedPosition;
+
+    [SerializeField] GameObject mPressureplateableObject;
+    IPressurePlateable mTargetTriggerableScript;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Get collider for player to jump on to activate pressure plate
         mPressurePlateTrigger = gameObject.GetComponent<Collider2D>();
+        // Get script to activate on Pressureplate pushed
+        mTargetTriggerableScript = mPressureplateableObject.GetComponent<IPressurePlateable>();
+        // Throw warning if script not found
+        if (mTargetTriggerableScript == null)
+        {
+            Debug.LogError("No IPressurePlateable script attatched to pressure plate");
+        }
     }
 
     // Update is called once per frame
@@ -22,21 +33,31 @@ public class PressurePlateScript : MonoBehaviour
     {
         if (mIsPressed)
         {
-            mPressurePadGraphic.localPosition = mButtonPressedPosition;
+            // Set graphic to lowered position
+            mPressurePadGraphic.position = mButtonPressedPosition.position;
         }
         else // not pressed
         {
-            mPressurePadGraphic.localPosition = mButtonUnpressedPosition;
+            // Set graphic to raised position
+            mPressurePadGraphic.position = mButtonUnpressedPosition.position;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        mIsPressed = true;
+        if (collision.CompareTag("Player")) // only activate for player
+        {
+            mIsPressed = true;
+            // Trigger target script
+            mTargetTriggerableScript.PressurePlatePushed();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        mIsPressed = false;
+        if (collision.CompareTag("Player")) // only activate for player
+        {
+            mIsPressed = false;
+        }
     }
 }

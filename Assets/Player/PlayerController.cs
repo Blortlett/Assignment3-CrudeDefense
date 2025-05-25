@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,22 +8,29 @@ public class PlayerController : MonoBehaviour
     //Pickup variables
     public GameObject GrabLocation;
     private GameObject HeldObject = null;
+    private bool InteractButtonPressed = false;
+    private List<GameObject> mOverlappingObjects = new List<GameObject>();
+
+    // Player Components
     public GameObject PlayerSprite = null;
     private Animator PlayerAnimator;
-
-
-
-
-
     private Rigidbody2D Rb; //Players rigid body for movement and collision
 
-    private float MoveAcceleration = 30;    //Character move speed
-    private float MaxMoveSpeed = 10;    //Character move speed
+    // Move Values
+    [SerializeField] private float MoveAcceleration = 20f;    //Character move speed
+    [SerializeField] private float MaxMoveSpeed = 15f;    //Character move speed
+    [SerializeField] private float mXDrag = .1f;
     private int LastPlayerMoveInput = 0;
 
-    private bool InteractButtonPressed = false;
+    // Jump values
+    [SerializeField] private float mJumpImpulse;
+    [SerializeField] private float mGravity;
+    public bool mGrounded = true;
 
-    private List<GameObject> mOverlappingObjects = new List<GameObject>();
+    // Lader values
+    [SerializeField] private float mLaderSpeed = 10f;
+    private bool mCanLader = false;
+
 
     private void Awake()
     {
@@ -33,14 +41,31 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Rb.gravityScale = mGravity;
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        InteractGrab();
+        Jump();
+        HandleLader();
+    }
 
+    private void Jump()
+    {
+        // implement jump here
+        // for now this will just handle y value - Matt
+        if (Input.GetKeyDown(KeyCode.Space) && mGrounded && !mCanLader)
+        {
+            Rb.AddForce(new Vector2(0, mJumpImpulse));
+            mGrounded = false;
+        }
+    }
+
+    private void InteractGrab()
+    {
         if (Input.GetKey(KeyCode.E))    //If pressed E
         {
             if (!InteractButtonPressed)
@@ -94,7 +119,6 @@ public class PlayerController : MonoBehaviour
         if (PlayerInput != 0)   //If player is inputing
         {
             PlayerAnimator.SetBool("IsWalking", true);
-            Debug.Log(PlayerAnimator.GetBool("IsWalking"));
             Rb.drag = 0;    //Player is frictionless
 
             float XVelocity = Rb.velocity.x;
@@ -104,21 +128,40 @@ public class PlayerController : MonoBehaviour
                 XVelocity = 0;  //Set velocity to zero so character doesn't slide
             }
 
-            XVelocity += PlayerInput * MoveAcceleration * Time.deltaTime;   //Adds to velocity
+            XVelocity += PlayerInput * MoveAcceleration * Time.deltaTime;       //Adds to velocity
             XVelocity = Mathf.Clamp(XVelocity, -MaxMoveSpeed, MaxMoveSpeed);    //Clamps velocity between -max and max move speed
 
-            Rb.velocity = new Vector2(XVelocity, 0);  //Sets player velocity
+            Rb.velocity = new Vector2(XVelocity, Rb.velocity.y);  //Sets player velocity
         }
         else
         {
             PlayerAnimator.SetBool("IsWalking", false);
-            Debug.Log(PlayerAnimator.GetBool("IsWalking"));
-            Rb.drag = 100;  //Increases drag so character slows down
+            //Rb.drag = 100;  //Increases drag so character slows down
+            Rb.velocity *= new Vector2(mXDrag, 1);
         }
 
         LastPlayerMoveInput = PlayerInput;  //Sets last player move input
     }
 
+    private void HandleLader()
+    {
+        if (!mCanLader) return; // If player cant lader, break out of this function and move on // Dont handle up/down input
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            // Travel up on W key input
+            Rb.velocity = new Vector2(Rb.velocity.x, mLaderSpeed);
+        }else if (Input.GetKey(KeyCode.S))
+        {
+            // Travel down on S key input // inversed lader speed
+            Rb.velocity = new Vector2(Rb.velocity.x, -1 * mLaderSpeed); 
+        }
+        else
+        {
+            // No input, zero y velocity
+            Rb.velocity = new Vector2(Rb.velocity.x, 0);
+        }
+    }
 
     private void PickupObject(GameObject _Object)
     {
@@ -172,12 +215,44 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D _Collider)
     {
         mOverlappingObjects.Add(_Collider.gameObject);  //Add to list
+
+        // Check for lader component
+        ILaderable laderComponentCheck = _Collider.GetComponent<ILaderable>();
+        if (laderComponentCheck != null)
+        {
+            // if exists check if laderable
+            if (laderComponentCheck.CanLader())
+            {
+                // Laderable, now disable player gravity
+                Rb.velocity = new Vector2(Rb.velocity.x, 0f);
+                Rb.gravityScale = 0f;
+                mCanLader = true;
+            }
+        }
     }
 
     //On stop overlap
     private void OnTriggerExit2D(Collider2D _Collider)
     {
         mOverlappingObjects.Remove(_Collider.gameObject);   //Remove from list
+
+        // Check for lader component
+        ILaderable laderComponentCheck = _Collider.GetComponent<ILaderable>();
+        if (laderComponentCheck != null)
+        {
+            // if exists check if laderable
+            if (laderComponentCheck.CanLader())
+            {
+                // Laderable, now enable player gravity
+                Rb.gravityScale = mGravity;
+                mCanLader = false;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        mGrounded = true;
     }
 
 }
