@@ -267,10 +267,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4029149740879420783}
     - target: {fileID: 3887156080656530387, guid: 8320bc360b0409541bcbd5c9fab89f99, type: 3}
-      propertyPath: mTurnPipeOpenTimeMax
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3887156080656530387, guid: 8320bc360b0409541bcbd5c9fab89f99, type: 3}
       propertyPath: mValveWheelableObject
       value: 
       objectReference: {fileID: 4029149740879420783}

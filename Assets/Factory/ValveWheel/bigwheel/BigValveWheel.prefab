@@ -46,7 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354791a5064c30a4996dbfcfd209bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WheelForwardAnimSpeed: 0.8
+  WheelBackwardAnimSpeed: 0.4
+  mTurnpipeOpeningSpeed: 0.5
+  mTurnpipeClosingSpeed: 0.15
+  mTurnPipeOpenTimeMax: 3
   mAnimator: {fileID: 1826119416425605529}
+  mValveWheelableObject: {fileID: 0}
 --- !u!61 &6603033609121600396
 BoxCollider2D:
   m_ObjectHideFlags: 0

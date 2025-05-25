@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class ValveWheel : MonoBehaviour, IInteractable
 {
+    // Animator Parameters
+    string AnimParameterBackward = "IsSpinBackward";
+
+    // Wheel states
     enum WheelState
     {
         WHEELSTATE_Closed,
@@ -14,13 +18,14 @@ public class ValveWheel : MonoBehaviour, IInteractable
     }
 
     // AnimationSpeeds
-    float WheelForwardAnimSpeed = 1f;
-    float WheelBackwardAnimSpeed = -0.5f;
+    [SerializeField] float WheelForwardAnimSpeed = 1f;
+    [SerializeField] float WheelBackwardAnimSpeed = 0.5f;
 
     // How much the turnpipe is turned
     float mTurnpipeCurrentOpenAmount = 0f;
     const float mTurnpipeMaxOpen = 100f;
     [SerializeField] float mTurnpipeOpeningSpeed = 2f;
+    [SerializeField] float mTurnpipeClosingSpeed = .5f;
     WheelState mCurrentWheelState = WheelState.WHEELSTATE_Closed;
 
     // Turnpipe stay open for timer
@@ -66,7 +71,9 @@ public class ValveWheel : MonoBehaviour, IInteractable
         switch (mCurrentWheelState)
         {
             case WheelState.WHEELSTATE_Opening:
-                // set animator speed to forward
+                // set animator to forward animation
+                mAnimator.SetBool(AnimParameterBackward, false);
+                // set animator speed to normal speed
                 mAnimator.speed = WheelForwardAnimSpeed; 
                 // increase turnwheel open %   -- Opening animation should be playing here...
                 mTurnpipeCurrentOpenAmount += mTurnpipeOpeningSpeed;
@@ -91,10 +98,12 @@ public class ValveWheel : MonoBehaviour, IInteractable
                 break;
 
             case WheelState.WHEELSTATE_Closing:
-                // Set animation to play backwards slowly
+                // Set animation to play backwards
+                mAnimator.SetBool(AnimParameterBackward, true);
+                // Set animation to play slower
                 mAnimator.speed = WheelBackwardAnimSpeed;
                 // decrease turnwheel open %   -- Closing animation should be playing here...
-                mTurnpipeCurrentOpenAmount -= mTurnpipeOpeningSpeed;
+                mTurnpipeCurrentOpenAmount -= mTurnpipeClosingSpeed;
                 // If wheel fully closes..
                 if (mTurnpipeCurrentOpenAmount <= 0f)
                 {

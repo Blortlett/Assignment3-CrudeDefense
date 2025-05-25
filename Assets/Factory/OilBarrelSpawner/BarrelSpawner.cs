@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
 
-public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable
+public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressurePlateable
 {
     [SerializeField] GameObject mBarrelSpawnObject;
     [SerializeField] GameObject mBarrelSprite;
@@ -112,5 +112,10 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable
         mIsMachineFull = false;
         mIsBarrelReadyForPickup = false;
         mLerpTime = 0f;
+    }
+
+    public void PressurePlatePushed()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4a41924aedf2f1443bb846431c952978
+guid: 367b396a1dd763b4b974bceb4d9fc136
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bigwheel-Sheet_0
+      name: smallwheel-backwards-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 100
-        height: 80
+        width: 81
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3bd93b9f71bf5f948adb7339aedba3f1
-      internalID: 599784930
+      spriteID: 171dfc4b204b57442a0905562dd73563
+      internalID: 524161679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bigwheel-Sheet_1
+      name: smallwheel-backwards-Sheet_1
       rect:
         serializedVersion: 2
-        x: 100
+        x: 81
         y: 0
-        width: 100
-        height: 80
+        width: 81
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 480bd2dea9e244f49b91b22f15afa5a9
-      internalID: 271974642
+      spriteID: 9ff19853c6b01e248a42ad83882fc87b
+      internalID: -196126479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bigwheel-Sheet_2
+      name: smallwheel-backwards-Sheet_2
       rect:
         serializedVersion: 2
-        x: 200
+        x: 162
         y: 0
-        width: 100
-        height: 80
+        width: 81
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d388dc0565978c542bdb1d4e4d92dbc6
-      internalID: 153120425
+      spriteID: caab8d1d0cc17de4b8a92bb690dc29e8
+      internalID: -1781339246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bigwheel-Sheet_3
+      name: smallwheel-backwards-Sheet_3
       rect:
         serializedVersion: 2
-        x: 300
+        x: 243
         y: 0
-        width: 100
-        height: 80
+        width: 81
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66af7779d4ad6924daf40915003e0dd1
-      internalID: 755557922
+      spriteID: b12d3e50359ac7b4cae4bc376ed203b4
+      internalID: 1371356182
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bigwheel-Sheet_0: 599784930
-      bigwheel-Sheet_1: 271974642
-      bigwheel-Sheet_2: 153120425
-      bigwheel-Sheet_3: 755557922
+      smallwheel-backwards-Sheet_0: 524161679
+      smallwheel-backwards-Sheet_1: -196126479
+      smallwheel-backwards-Sheet_2: -1781339246
+      smallwheel-backwards-Sheet_3: 1371356182
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

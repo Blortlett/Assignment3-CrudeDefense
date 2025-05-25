@@ -19,7 +19,8 @@ public class WaveSpawner: MonoBehaviour
             EnemyFlyweightFactory.PolarBear,
             EnemyFlyweightFactory.Penguin,
             EnemyFlyweightFactory.Wolf,
-            EnemyFlyweightFactory.Owl
+            EnemyFlyweightFactory.Owl,
+            EnemyFlyweightFactory.Seal
         };
 
         StartCoroutine(SpawnWaves());

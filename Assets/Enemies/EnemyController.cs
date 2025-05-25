@@ -117,4 +117,5 @@ public static class EnemyFlyweightFactory
     public static EnemyFlyWeight Penguin = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Penguin/AnimController_Animal_Penguin"), Resources.Load<Sprite>("Penguin/Penguin-Sheet"), 2f, 10f);
     public static EnemyFlyWeight Wolf = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Wolf/AnimController_Animal_Wolf"), Resources.Load<Sprite>("Wolf/Wolf-Sheet"), 3f, 10f);
     public static EnemyFlyWeight Owl = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Owl/AnimController_Animal_Owl"), Resources.Load<Sprite>("Owl/Owl-Sheet"), 5f, 40f);
+    public static EnemyFlyWeight Seal = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Seal/AnimController_Animal_Seal"), Resources.Load<Sprite>("OwSeal/Seal-Sheet"), .7f, 40f);
 }
