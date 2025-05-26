@@ -69,7 +69,7 @@ public class Explosion : MonoBehaviour
                 Collider.radius = TileSprite.bounds.size.x / 2;
                 // exclude player layer from collision
                 LayerMask excludeMask = new LayerMask();
-                excludeMask = 1 << 3;   // exlude layer mask only takes bits, hence psycho bitshifting to create bit value on the fly
+                excludeMask = 1 << 3;   // exlude layer mask only takes bits, hence psycho use of bitshifting to create bit value on the fly
                 Collider.excludeLayers = excludeMask;
 
                 //
