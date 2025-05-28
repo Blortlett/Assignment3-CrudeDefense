@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mLaderSpeed = 10f;
     private bool mCanLader = false;
 
+    private float mTimeOfLastAttack = 0;
+    private const float mAttackDelay = 1;
+
 
     private void Awake()
     {
@@ -51,7 +54,14 @@ public class PlayerController : MonoBehaviour
         InteractGrab();
         Jump();
         HandleLader();
-    }
+
+        if (Time.realtimeSinceStartup - mTimeOfLastAttack > mAttackDelay && Input.GetKey(KeyCode.F))    //If pressed E
+        {
+            PlayerAnimator.SetTrigger("Attack");
+            mTimeOfLastAttack = Time.realtimeSinceStartup;
+        }
+
+        }
 
     private void Jump()
     {
