@@ -33,6 +33,10 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
     // Fill barrel particle feedback
     [SerializeField] private ParticleSystem mFillBarrelParticles;
 
+    // Oil Silo to take from
+    [SerializeField] private float mAmountOilToTake = 7f;
+    [SerializeField] private RefinedOilSilo mOilSiloScript;
+
 
     void Start()
     {
@@ -120,6 +124,14 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
 
     public void PressurePlatePushed()
     {
+        if (mOilSiloScript == null) // Error check oil silo script is attatched
+        {
+            Debug.Log("No oil silo script attatched, returning from function");
+            return;
+        }
+        if (mOilSiloScript.GetOilLevel() <= mAmountOilToTake) return; // Do not fill barrel if not enough oil
+
+        mOilSiloScript.RemoveOil(mAmountOilToTake);
         mFillBarrelParticles.Play();
 
         // Check barrel is in ready to fill position

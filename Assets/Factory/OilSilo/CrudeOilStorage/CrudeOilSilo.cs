@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OilSiloScript : MonoBehaviour, IValveWheelable
+public class CrudeOilSilo: MonoBehaviour, IValveWheelable
 {
     // Oil level visuals
     [SerializeField] private Transform mOilLevelParent; // Reference to the oil level sprite
     private const float mMaxOilLevel = 100f;
     private float mCurrentOilLevel = 0f;
     // Rate at which the tank fills
-    [SerializeField] private const float mFillRate = .1f;
+    [SerializeField] private float mFillRate = .1f;
     // Silo running/filling variables
     public bool mMachineRunning = false;
     // MaxGraphicSize
@@ -44,5 +44,22 @@ public class OilSiloScript : MonoBehaviour, IValveWheelable
     {
         if (mCurrentOilLevel >= mMaxOilLevel) return;
         mCurrentOilLevel += mFillRate * WheelOpenPercent;
+    }
+
+    public float GetOilLevel()
+    {
+        return mCurrentOilLevel;
+    }
+
+    public void RemoveOil(float Amount)
+    {
+        // Remove oil
+        mCurrentOilLevel -= Amount;
+
+        // clamp min value to 0
+        if (mCurrentOilLevel < 0f)
+        {
+            mCurrentOilLevel = 0f;
+        }
     }
 }
