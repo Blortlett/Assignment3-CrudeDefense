@@ -20,3 +20,13 @@ public interface IPressurePlateable
 {
     public void PressurePlatePushed();
 }
+
+public interface IAcceptCoal
+{
+    public void OnRecieveCoal();
+}
+
+public interface IFurnaceable
+{
+    public void OnToggleFurnace(bool _isOn);
+}

@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -112323507
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -1900869312, guid: d2a1cc79fb3f0ed43a91aa39b92d87de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 1230448533366731360}
   m_Layer: 0
   m_Name: Furnace
-  m_TagString: Untagged
+  m_TagString: Furnace
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c8219318fea6046be38e82a10cec28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCoalBurnRate: 5
+  mCoalBurnRate: 0.3
   mProgressBarScr: {fileID: 2733513635405393762}
+  mCoalbagMult: 0.6
 --- !u!61 &1230448533366731360
 BoxCollider2D:
   m_ObjectHideFlags: 0

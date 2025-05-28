@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5435083773129623798}
   - component: {fileID: 5578654744372925570}
   - component: {fileID: 4390039456840185503}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 3012321932525907322}
   - component: {fileID: 456492735474345401}
   - component: {fileID: 3036386822485948793}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2581386894691314280}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GrabLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 4510319704116654990}
   - component: {fileID: 1244918681988123859}
   - component: {fileID: 5466228958142298677}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerSpriteSheet_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4489993354368838598}
   - component: {fileID: 5955476395330450142}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
