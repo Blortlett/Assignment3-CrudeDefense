@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c8219318fea6046be38e82a10cec28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCoalBurnRate: 0.3
+  mCoalBurnRate: 1.1
   mProgressBarScr: {fileID: 2733513635405393762}
   mCoalbagMult: 0.6
   mFurnaceableObject: {fileID: 0}

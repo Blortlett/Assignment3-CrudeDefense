@@ -19,6 +19,9 @@ public class CoalPallet : MonoBehaviour, IPickupable
     public GameObject Pickup()
     {
         GameObject spawnedBarrel = Instantiate(CoalBagSpawnable, gameObject.transform.position, Quaternion.identity);
+        // -= TUTORIAL =-
+        TutorialScr.instance.TutorialCoalBagsComplete();
+        // -= TUTORIAL =-
         return spawnedBarrel;
     }
 

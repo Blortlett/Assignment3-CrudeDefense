@@ -85,6 +85,9 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
     {
         if (mIsBarrelReadyForPickup)
         {
+            // -= Tutorial =-
+            TutorialScr.instance.TutorialOilBarrelPickupComplete();
+            // -= Tutorial =-
             return true;
         }
         else
@@ -203,6 +206,10 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
             mBarrelReachedPoint3 = true; // set track animation bool to complete so we don't repeat above code
             mLerpTime = 0f; // reset animation timer
             mIsBarrelReadyForPickup = true; // This bool lets pickup barrel code get executed
+
+            // -= Tutorial =-
+            TutorialScr.instance.TutorialPressurePadComplete();
+            // -= Tutorial =-
         }
     }
 }
