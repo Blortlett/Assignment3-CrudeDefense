@@ -21,13 +21,14 @@ public class TutorialScr : MonoBehaviour
     private bool Tutorial2Enabled = false;
     private bool Tutorial2CompletePart1 = false;
     private bool Tutorial2CompletePart2 = false;
+    private bool Tutorial2Complete = false;
 
 
 
     private string[] mTut2Dialogues = new string[]
     {
         "There ya go! Now fire up that machine and get to work.",
-        "I need 3 more barrels before I can set out to go sell them for us"
+        "I need 3 more barrels before I can go sell them for us."
     };
 
 
@@ -48,25 +49,26 @@ public class TutorialScr : MonoBehaviour
             // Click to remove tutorial 1
             if (!Tutorial1Complete)
             {
+                Tutorial1Complete = true;
                 DialogBox.SetActive(false);
             }
             // Click to swap to tutorial 2 part 2 dialog
             else if (Tutorial2Enabled && !Tutorial2CompletePart1)
             {
-                Tutorial2CompletePart1 = true;
                 DialogText.text = mTut2Dialogues[1];
+                Tutorial2CompletePart1 = true;
             }
             // Click to swap to close tutorial 2 dialog
             else if (Tutorial2CompletePart1 && !Tutorial2CompletePart2)
             {
                 DialogBox.SetActive(false);
                 Tutorial2CompletePart2 = true;
+                Tutorial2Complete = true;
             }
         }
 
-
         // Barrels loaded on to boat
-        if (mBoatBarrelHolder.GetBarrelCount() >= 3)
+        if (!Tutorial2Enabled && mBoatBarrelHolder.GetBarrelCount() >= 3)
             // start tutorial 2
             EnableTutorial2();
     }
