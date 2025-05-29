@@ -33,6 +33,10 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
     // Fill barrel particle feedback
     [SerializeField] private ParticleSystem mFillBarrelParticles;
 
+    // Timer for barrel to wait after full, before moving to pickup point
+    [SerializeField] private float mBarrelWaitTimerMax = 1f;
+    private float mBarrelWaitTimer;
+
     // Oil Silo to take from
     [SerializeField] private float mAmountOilToTake = 7f;
     [SerializeField] private RefinedOilSilo mOilSiloScript;
@@ -40,6 +44,8 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
 
     void Start()
     {
+        // Set barrel wait timer before moving to final pickup point
+        mBarrelWaitTimer = mBarrelWaitTimerMax;
     }
 
     void FixedUpdate()
@@ -47,6 +53,12 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
         // Below is code exclusively for Barrel spawn animation.
         if (mpAnimatedBarrelSprite == null)// If barrel sprite doesnt exist, then return... don't bother animating
             return;
+
+        // If Barrel full, countdown before moving barrel to pickup point
+        if (mBarrelFull)
+        {
+            mBarrelWaitTimer -= Time.fixedDeltaTime;
+        }
 
         // Lerp Barrel to first point (Barrel falls out of machine)
         if (!mBarrelReachedPoint1)
@@ -120,6 +132,8 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
         // New barrel should be empty at start
         mBarrelCurrentFullness = 0;
         mBarrelFull = false;
+        // Set barrel wait timer before moving to final pickup point
+        mBarrelWaitTimer = mBarrelWaitTimerMax;
     }
 
     public void PressurePlatePushed()

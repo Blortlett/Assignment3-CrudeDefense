@@ -249,9 +249,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mOilLevelParent: {fileID: 123508082705211789}
+  mFillRate: 0.2
+  mStealMult: 1.6
   mMachineRunning: 0
   mMaxOilGraphicYScale: 1.9
-  CrudeOilSiloScript: {fileID: 0}
+  mCrudeOilSiloScript: {fileID: 0}
 --- !u!1001 &583088679613824582
 PrefabInstance:
   m_ObjectHideFlags: 0
