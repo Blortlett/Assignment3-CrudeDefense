@@ -67,6 +67,10 @@ public class PlayerController : MonoBehaviour
             HitSound.Play();
             mTimeOfLastAttack = Time.realtimeSinceStartup;
         }
+        if (mGrounded)
+        {
+            PlayerAnimator.SetBool("IsInAir", false);
+        }
 
     }
 
@@ -115,6 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             Rb.AddForce(new Vector2(0, mJumpImpulse));
             mGrounded = false;
+            PlayerAnimator.SetBool("IsInAir", true);
         }
     }
 
@@ -306,6 +311,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Grounded");
         mGrounded = true;
     }
 
