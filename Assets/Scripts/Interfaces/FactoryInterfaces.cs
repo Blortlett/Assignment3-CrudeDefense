@@ -30,3 +30,8 @@ public interface IFurnaceable
 {
     public void OnToggleFurnace(bool _isOn);
 }
+
+public interface IAcceptBarrels
+{
+    public void OnRecieveBarrel();
+}

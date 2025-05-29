@@ -25,7 +25,7 @@ public class CoalBag : MonoBehaviour, IPickupable
     public void PutDown()
     {
         // Return from function if no furnace in trigger
-        if (mFurnaceInTrigger[0] == null) return;
+        if (mFurnaceInTrigger == null || mFurnaceInTrigger.Count == 0) return;
         scrFurnace FurnaceScript = mFurnaceInTrigger[0].GetComponent<scrFurnace>();
         // Return if furnace script is not active
         if (FurnaceScript != null)

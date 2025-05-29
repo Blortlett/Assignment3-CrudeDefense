@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FactoryComponent
   - Furnace
+  - Boat
   layers:
   - Default
   - TransparentFX
@@ -57,4 +58,13 @@ TagManager:
     locked: 0
   - name: Front
     uniqueID: 3820901455
+    locked: 0
+  - name: BoatOilBack
+    uniqueID: 3196789391
+    locked: 0
+  - name: BoatOilFront
+    uniqueID: 2224810773
+    locked: 0
+  - name: BoatLayer
+    uniqueID: 1767677433
     locked: 0
