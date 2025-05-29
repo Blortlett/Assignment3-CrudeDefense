@@ -33,9 +33,19 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
     // Fill barrel particle feedback
     [SerializeField] private ParticleSystem mFillBarrelParticles;
 
+    // Timer for barrel to wait after full, before moving to pickup point
+    [SerializeField] private float mBarrelWaitTimerMax = 1f;
+    private float mBarrelWaitTimer;
+
+    // Oil Silo to take from
+    [SerializeField] private float mAmountOilToTake = 7f;
+    [SerializeField] private RefinedOilSilo mOilSiloScript;
+
 
     void Start()
     {
+        // Set barrel wait timer before moving to final pickup point
+        mBarrelWaitTimer = mBarrelWaitTimerMax;
     }
 
     void FixedUpdate()
@@ -43,6 +53,12 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
         // Below is code exclusively for Barrel spawn animation.
         if (mpAnimatedBarrelSprite == null)// If barrel sprite doesnt exist, then return... don't bother animating
             return;
+
+        // If Barrel full, countdown before moving barrel to pickup point
+        if (mBarrelFull)
+        {
+            mBarrelWaitTimer -= Time.fixedDeltaTime;
+        }
 
         // Lerp Barrel to first point (Barrel falls out of machine)
         if (!mBarrelReachedPoint1)
@@ -57,7 +73,11 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
         // Lerp Barrel to third point (Push barrel along to pickup point) // Barrel should also be full
         else if (mBarrelReachedPoint2 && !mBarrelReachedPoint3 && mBarrelFull)
         {
-            LerpToPoint3();
+            // Wait timer before moving to final point
+            mBarrelWaitTimer -= Time.deltaTime;
+            if (mBarrelWaitTimer < 0f)
+                // Move 
+                LerpToPoint3();
         }
     }
 
@@ -65,6 +85,9 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
     {
         if (mIsBarrelReadyForPickup)
         {
+            // -= Tutorial =-
+            TutorialScr.instance.TutorialOilBarrelPickupComplete();
+            // -= Tutorial =-
             return true;
         }
         else
@@ -116,10 +139,20 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
         // New barrel should be empty at start
         mBarrelCurrentFullness = 0;
         mBarrelFull = false;
+        // Set barrel wait timer before moving to final pickup point
+        mBarrelWaitTimer = mBarrelWaitTimerMax;
     }
 
     public void PressurePlatePushed()
     {
+        if (mOilSiloScript == null) // Error check oil silo script is attatched
+        {
+            Debug.Log("No oil silo script attatched, returning from function");
+            return;
+        }
+        if (mOilSiloScript.GetOilLevel() <= mAmountOilToTake) return; // Do not fill barrel if not enough oil
+
+        mOilSiloScript.RemoveOil(mAmountOilToTake);
         mFillBarrelParticles.Play();
 
         // Check barrel is in ready to fill position
@@ -151,8 +184,8 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
 
     private void LerpToPoint2()
     {
-        mLerpTime += Time.deltaTime; // Increase lerp time for calculation below
-        float TweenXPos = Mathf.Lerp(mpAnimatedBarrelSprite.transform.position.x, mTweenPoint2.position.x, mLerpTime); // Use lerp to calculate barrel X position
+        mLerpTime += Time.deltaTime * 1.3f; // Increase lerp time for calculation below
+        float TweenXPos = Mathf.Lerp(mTweenPoint1.transform.position.x, mTweenPoint2.position.x, mLerpTime); // Use lerp to calculate barrel X position
         mpAnimatedBarrelSprite.transform.position = new Vector3(TweenXPos, mpAnimatedBarrelSprite.transform.position.y, 0f); // Apply lerp
         if (mLerpTime >= 1f)
         {
@@ -165,7 +198,7 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
     private void LerpToPoint3()
     {
         mLerpTime += Time.deltaTime; // Increase lerp time for calculation below
-        float TweenXPos = Mathf.Lerp(mpAnimatedBarrelSprite.transform.position.x, mTweenPoint3.position.x, mLerpTime); // Use lerp to calculate barrel X position
+        float TweenXPos = Mathf.Lerp(mTweenPoint2.transform.position.x, mTweenPoint3.position.x, mLerpTime); // Use lerp to calculate barrel X position
         mpAnimatedBarrelSprite.transform.position = new Vector3(TweenXPos, mpAnimatedBarrelSprite.transform.position.y, 0f); // Apply lerp
         if (mLerpTime >= 1f)
         {
@@ -173,6 +206,10 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
             mBarrelReachedPoint3 = true; // set track animation bool to complete so we don't repeat above code
             mLerpTime = 0f; // reset animation timer
             mIsBarrelReadyForPickup = true; // This bool lets pickup barrel code get executed
+
+            // -= Tutorial =-
+            TutorialScr.instance.TutorialPressurePadComplete();
+            // -= Tutorial =-
         }
     }
 }

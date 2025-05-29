@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class COilBarrel : MonoBehaviour , IPickupable
 {
+    [SerializeField] GameObject mTutorialArrow;
+
+    // Track Items In Collider
+    public List<Collider2D> mBoatInTrigger = new List<Collider2D>();
+
+    // Pickup barrel variables
     const bool mCanPickup = true;
     private float mOriginalYPosition;
 
@@ -14,11 +20,26 @@ public class COilBarrel : MonoBehaviour , IPickupable
 
     public GameObject Pickup()
     {
+        mTutorialArrow.SetActive(false);
         return gameObject;
     }
 
     public void PutDown()
     {
+        // Return from function if no boat in trigger
+        if (mBoatInTrigger == null || mBoatInTrigger.Count == 0) return;
+        Boat BoatScr = mBoatInTrigger[0].GetComponent<Boat>();
+        // Return if furnace script is not active
+        if (BoatScr != null)
+        {
+            BoatScr.OnRecieveBarrel(); // trigger furnace to restock progress
+            Destroy(gameObject); // Destroy coal bag
+        }
+        else
+        {
+            Debug.Log("No BoatScript attatched to Boat");
+            return;
+        }
     }
 
 
@@ -42,5 +63,27 @@ public class COilBarrel : MonoBehaviour , IPickupable
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Boat"))
+        {
+            mBoatInTrigger.Add(collision);
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Boat"))
+        {
+            mBoatInTrigger.Remove(collision);
+        }
+    }
+
+    public void EnableTutorialArrow()
+    {
+        mTutorialArrow.SetActive(true);
     }
 }

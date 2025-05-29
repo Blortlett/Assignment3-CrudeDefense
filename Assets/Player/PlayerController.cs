@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // InteractUI Toggleable
+    [SerializeField] private GameObject InteractableUI;
+
     //Pickup variables
     public GameObject GrabLocation;
     private GameObject HeldObject = null;
@@ -31,6 +34,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mLaderSpeed = 10f;
     private bool mCanLader = false;
 
+    private float mTimeOfLastAttack = 0;
+    private const float mAttackDelay = 1;
+
 
     private void Awake()
     {
@@ -51,6 +57,51 @@ public class PlayerController : MonoBehaviour
         InteractGrab();
         Jump();
         HandleLader();
+        CheckInteractable();
+
+        if (Time.realtimeSinceStartup - mTimeOfLastAttack > mAttackDelay && Input.GetKey(KeyCode.F))    //If pressed E
+        {
+            PlayerAnimator.SetTrigger("Attack");
+            mTimeOfLastAttack = Time.realtimeSinceStartup;
+        }
+
+    }
+
+    private void CheckInteractable()
+    {
+        // If no item exists, return from this check
+        if (mOverlappingObjects == null || mOverlappingObjects.Count == 0)
+        {
+            // Disable Interact UI
+            InteractableUI.SetActive(false);
+            return; // No need to proceed futher with check
+        }
+        IInteractable ObjectOverlapInteract = mOverlappingObjects[0].GetComponent<IInteractable>();
+        if (ObjectOverlapInteract != null)
+        {
+            Debug.Log("Interactable found!");
+            if (ObjectOverlapInteract.CanInteract())
+            {
+                InteractableUI.SetActive(true);
+                return;     // Interact symbol enabled, return from here happy
+            }
+        }
+        else
+        {
+            IPickupable ObjectOverlapPickup = mOverlappingObjects[0].GetComponent<IPickupable>();
+            if (ObjectOverlapPickup != null)
+            {
+                Debug.Log("Pickupable found!");
+                // Check if player can pickup item
+                if (ObjectOverlapPickup.CanPickup())
+                {
+                    InteractableUI.SetActive(true);
+                    return; // Interact symbol enabled, return from here happy
+                }
+            }    
+        }
+        // No interactables found... disable InteractableUI
+        InteractableUI.SetActive(false);
     }
 
     private void Jump()

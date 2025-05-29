@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Globals : MonoBehaviour
 {
     public static Globals instance { private set; get; } // Singleton variable
 
-    public static GameObject PlayerGameObject;
-    public static bool IsPlayerInteracting = false;
+    // UI to update
+    [SerializeField] private TMP_Text mMoneyUIDisplay;
+    [SerializeField] private BarrelSoldAlert mMoneyUIAlert;
 
-    public const float mGroundYPos = -3.55f;
+    // Player Money Variable
+    private int mPlayerMoney = 0;
+    private int mMoneyIncrement = 1000;
 
     void Awake()
     {
@@ -22,6 +24,13 @@ public class Globals : MonoBehaviour
         {
             instance = this;
         }
-}
+    }
 
+
+    public void BarrelSold()
+    {
+        mPlayerMoney += mMoneyIncrement;
+        mMoneyUIAlert.TriggerAlertUI();
+        mMoneyUIDisplay.text = "$" + mPlayerMoney;
+    }
 }
