@@ -1799,18 +1799,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Waves:
-  - EnemyCount: 1
-    SpawnInterval: 1
+  - SpawnInterval: 1
     InitialDelay: 1
-    WaveDelay: 3
-  - EnemyCount: 2
-    SpawnInterval: 1
-    InitialDelay: 1
-    WaveDelay: 3
-  - EnemyCount: 3
-    SpawnInterval: 1
-    InitialDelay: 1
-    WaveDelay: 3
+    WaveDelay: 30
+    MaxEnemyCost: 5
+  - SpawnInterval: 1
+    InitialDelay: 30
+    WaveDelay: 30
+    MaxEnemyCost: 10
+  - SpawnInterval: 1
+    InitialDelay: 60
+    WaveDelay: 30
+    MaxEnemyCost: 15
   enemyPrefab: {fileID: 7938248023522960838, guid: 03b2e21616f9c504283ea8f16c5060ce, type: 3}
   SpawnPoints:
   - {fileID: 417459803}

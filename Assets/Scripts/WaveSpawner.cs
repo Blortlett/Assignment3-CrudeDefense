@@ -34,10 +34,29 @@ public class WaveSpawner: MonoBehaviour
 
             yield return new WaitForSeconds(Wave.InitialDelay);
 
-            for (int i = 0; i < Wave.EnemyCount; i++)
+            int CurrentCostSum = 0;
+
+            while (CurrentCostSum < Wave.MaxEnemyCost)
             {
+                List<EnemyFlyWeight> AffordableEnemies = new List<EnemyFlyWeight>();
+                //While there's budget to add enemies to the list to spawn,
+                //add enemies.
+                foreach (EnemyFlyWeight ET in EnemyTypes)
+                {
+                    if (ET.miCost <= (Wave.MaxEnemyCost - CurrentCostSum))
+                    {
+                        AffordableEnemies.Add(ET);
+                    }
+                }
+
+                //If we run out of AffordableEnemies, stop spawning
+                if (AffordableEnemies.Count == 0)
+                {
+                    break;
+                }
+
                 //Pick a random enemy FlyWeight
-                EnemyFlyWeight ChosenFlyWeight = EnemyTypes[Random.Range(0, EnemyTypes.Count)];
+                EnemyFlyWeight ChosenFlyWeight = AffordableEnemies[Random.Range(0, AffordableEnemies.Count)];
                 //Pick a spawn point
                 Transform SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
                 //Instantiate the enemy
@@ -49,6 +68,9 @@ public class WaveSpawner: MonoBehaviour
                 {
                     EnemyComp.Initialize(ChosenFlyWeight);
                 }
+
+                //Update CurrentCostSum
+                CurrentCostSum += ChosenFlyWeight.miCost;
 
                 //Wait for spawn interval before spawning new enemy
                 yield return new WaitForSeconds(Wave.SpawnInterval);
@@ -64,10 +86,11 @@ public class WaveSpawner: MonoBehaviour
 [System.Serializable]
 public class Wave
 {
-    public int EnemyCount;
-    public float SpawnInterval;
-    public float InitialDelay;
-    public float WaveDelay;
+    //public int EnemyCount; //Amount of enemies per wave
+    public float SpawnInterval; //Delay between enemy spawns
+    public float InitialDelay; //Delay before initial wave spawns
+    public float WaveDelay; //Delay between waves spawning
+    public int MaxEnemyCost; //Maximum "value" of a wave
 }
 
 //using static WaveSpawner;
