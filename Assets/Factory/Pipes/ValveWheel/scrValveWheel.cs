@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class ValveWheel : MonoBehaviour, IInteractable
@@ -49,6 +48,10 @@ public class ValveWheel : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        // -= TUTORIAL =-
+        TutorialScr.instance.TutorialLittleWheelComplete();
+        TutorialScr.instance.TutorialBigWheelComplete();
+        // -= TUTORIAL =-
         mCurrentWheelState = WheelState.WHEELSTATE_Opening;
         mAnimator.speed = .7f;
     }

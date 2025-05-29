@@ -56,6 +56,10 @@ public class scrFurnace : MonoBehaviour, IAcceptCoal
 
     public void OnRecieveCoal()
     {
+        // -= TUTORIAL =-
+        TutorialScr.instance.TutorialFurnaceComplete();
+        // -= TUTORIAL =-
+
         // Add burn time to furnace
         mCurrentCoalAmount += mMaxCoalAmount * mCoalbagMult;
 

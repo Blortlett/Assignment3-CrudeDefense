@@ -32,6 +32,10 @@ public class ButtonInteractable : MonoBehaviour,  IInteractable
         if (mToggleableScript != null)
         {
             mToggleableScript.OnButtonPress();
+
+            // -= TUTORIAL =-
+            TutorialScr.instance.TutorialBarrelButtonComplete();
+            // -= TUTORIAL =-
         }
     }
 

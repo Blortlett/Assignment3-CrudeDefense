@@ -26,7 +26,6 @@ public class Enemy : MonoBehaviour, IEnemy
         mMovementDirection = new Vector2(-currentPosition.x, 0).normalized;
 
         mAnimator.runtimeAnimatorController = mpFlyweight.pAnmatorController;
-        mSpriteRenderer.sprite = mpFlyweight.pSpriteSheet;
 
         SetFacingDirection();
     }
@@ -51,15 +50,6 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         mpFlyweight = flyweight;
 
-        if (mpFlyweight.pSpriteSheet != null)
-        {
-            mSpriteRenderer.sprite = mpFlyweight.pSpriteSheet;
-        }
-        else
-        {
-            Debug.Log("No sprite sheet!");
-        }
-
         if (mpFlyweight.pAnmatorController != null)
         {
             mAnimator.runtimeAnimatorController = mpFlyweight.pAnmatorController;
@@ -74,11 +64,11 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (mMovementDirection.x > 0f)
         {
-            transform.localScale = mFaceRightScale;
+            mSpriteRenderer.transform.localScale = mFaceRightScale;
         }
         else
         {
-            transform.localScale = mFaceLeftScale;
+            mSpriteRenderer.transform.localScale = mFaceLeftScale;
         }
     }
 
@@ -98,14 +88,12 @@ public class Enemy : MonoBehaviour, IEnemy
 public class EnemyFlyWeight
 {
     public RuntimeAnimatorController pAnmatorController;
-    public Sprite pSpriteSheet;
     public float mfMoveSpeed;
     public float mfHitPoints;
 
-    public EnemyFlyWeight(RuntimeAnimatorController _AnimatorController, Sprite _SpriteSheet, float _MoveSpeed, float _HitPoints)
+    public EnemyFlyWeight(RuntimeAnimatorController _AnimatorController, float _MoveSpeed, float _HitPoints)
     {
         this.pAnmatorController = _AnimatorController;
-        this.pSpriteSheet = _SpriteSheet;
         this.mfMoveSpeed = _MoveSpeed;
         this.mfHitPoints = _HitPoints;
     }
@@ -113,9 +101,9 @@ public class EnemyFlyWeight
 
 public static class EnemyFlyweightFactory
 {
-    public static EnemyFlyWeight PolarBear = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Polarbear/AnimController_Animal_PolarBear"), Resources.Load<Sprite>("Polarbear/Polarbear-Sheet"), 1.5f, 70f);
-    public static EnemyFlyWeight Penguin = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Penguin/AnimController_Animal_Penguin"), Resources.Load<Sprite>("Penguin/Penguin-Sheet"), 2f, 10f);
-    public static EnemyFlyWeight Wolf = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Wolf/AnimController_Animal_Wolf"), Resources.Load<Sprite>("Wolf/Wolf-Sheet"), 3f, 10f);
-    public static EnemyFlyWeight Owl = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Owl/AnimController_Animal_Owl"), Resources.Load<Sprite>("Owl/Owl-Sheet"), 5f, 40f);
-    public static EnemyFlyWeight Seal = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Seal/AnimController_Animal_Seal"), Resources.Load<Sprite>("OwSeal/Seal-Sheet"), .7f, 40f);
+    public static EnemyFlyWeight PolarBear = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Polarbear/AnimController_Animal_PolarBear"), 1.5f, 70f);
+    public static EnemyFlyWeight Penguin = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Penguin/AnimController_Animal_Penguin"), 2f, 10f);
+    public static EnemyFlyWeight Wolf = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Wolf/AnimController_Animal_Wolf"), 3f, 10f);
+    public static EnemyFlyWeight Owl = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Owl/AnimController_Animal_Owl"), 5f, 40f);
+    public static EnemyFlyWeight Seal = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Seal/AnimController_Animal_Seal"), .7f, 40f);
 }

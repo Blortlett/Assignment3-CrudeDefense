@@ -1423,10 +1423,6 @@ PrefabInstance:
       value: -112323507
       objectReference: {fileID: 0}
     - target: {fileID: 2282622479105808796, guid: 6e4fb9253a7c07f449422c796d008172, type: 3}
-      propertyPath: mFillRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2282622479105808796, guid: 6e4fb9253a7c07f449422c796d008172, type: 3}
       propertyPath: CrudeOilSiloScript
       value: 
       objectReference: {fileID: 7121695884662868875}
