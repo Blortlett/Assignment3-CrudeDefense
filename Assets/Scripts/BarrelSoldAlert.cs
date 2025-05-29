@@ -72,7 +72,7 @@ public class BarrelSoldAlert : MonoBehaviour
         // Set Opactiy
         mOpacityGroup.alpha = TweenOpacity;
         // If lerp complete
-        if (mLerpInTimer >= 1f)
+        if (mLerpOutTimer >= 1f)
         {
             mOpacityGroup.alpha = 0f;
             mLerpOutComplete = true; // set lerp complete

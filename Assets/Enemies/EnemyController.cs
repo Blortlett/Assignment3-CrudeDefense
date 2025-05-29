@@ -64,11 +64,11 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (mMovementDirection.x > 0f)
         {
-            transform.localScale = mFaceRightScale;
+            mSpriteRenderer.transform.localScale = mFaceRightScale;
         }
         else
         {
-            transform.localScale = mFaceLeftScale;
+            mSpriteRenderer.transform.localScale = mFaceLeftScale;
         }
     }
 
