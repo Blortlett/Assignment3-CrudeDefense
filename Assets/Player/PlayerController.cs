@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     private float mTimeOfLastAttack = 0;
     private const float mAttackDelay = 1;
 
+    [SerializeField] private AudioSource HitSound;
+
 
     private void Awake()
     {
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
         if (Time.realtimeSinceStartup - mTimeOfLastAttack > mAttackDelay && Input.GetKey(KeyCode.F))    //If pressed E
         {
             PlayerAnimator.SetTrigger("Attack");
+            HitSound.Play();
             mTimeOfLastAttack = Time.realtimeSinceStartup;
         }
 
