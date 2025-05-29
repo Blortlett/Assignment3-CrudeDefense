@@ -68,4 +68,9 @@ public class BarrelHolder : MonoBehaviour
         mBarrelCount = 0;
         SetSprites();
     }
+
+    public int GetBarrelCount()
+    {
+        return mBarrelCount;
+    }
 }

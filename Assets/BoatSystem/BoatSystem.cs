@@ -23,7 +23,7 @@ public class BoatSystem: MonoBehaviour
     // Lerp timer
     private float mLerpTime = 0f;
     // Track boat animation points
-    bool mBoatReachedWaitPoint = false;
+    bool mBoatReachedWaitPoint = true;
     bool mBoatReachedEndPoint = false;
 
     void Start()
@@ -31,7 +31,7 @@ public class BoatSystem: MonoBehaviour
         // set respawn wait timer to max time
         mBoatRespawnTimer = mBoatRespawnMaxTimer;
         // Set boat to start position
-        mBoatObject.transform.position = TweenPointBoatStart.position;
+        mBoatObject.transform.position = TweenPointBoatWaitPoint.position;
     }
 
     void Update()

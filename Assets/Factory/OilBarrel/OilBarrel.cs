@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class COilBarrel : MonoBehaviour , IPickupable
 {
+    [SerializeField] GameObject mTutorialArrow;
+
     // Track Items In Collider
     public List<Collider2D> mBoatInTrigger = new List<Collider2D>();
 
@@ -18,6 +20,7 @@ public class COilBarrel : MonoBehaviour , IPickupable
 
     public GameObject Pickup()
     {
+        mTutorialArrow.SetActive(false);
         return gameObject;
     }
 
@@ -77,5 +80,10 @@ public class COilBarrel : MonoBehaviour , IPickupable
         {
             mBoatInTrigger.Remove(collision);
         }
+    }
+
+    public void EnableTutorialArrow()
+    {
+        mTutorialArrow.SetActive(true);
     }
 }
