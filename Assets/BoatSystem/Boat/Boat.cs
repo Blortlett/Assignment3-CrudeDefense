@@ -56,5 +56,6 @@ public class Boat : MonoBehaviour, IAcceptBarrels
     public void OnRecieveBarrel()
     {
         Debug.Log("Barrel Accepted :)");
+        mBarrelHolderScr.AcceptBarrel();
     }
 }

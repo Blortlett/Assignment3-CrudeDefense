@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BarrelHolder : MonoBehaviour
 {
+    // BoatSystem Script Reference
+    [SerializeField] private BoatSystem mBoatSystem;
+
     // Barrel sprites
     [SerializeField] private GameObject[] mOilSprites = new GameObject[6];
     // Barrels on boat counter
@@ -22,5 +25,17 @@ public class BarrelHolder : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AcceptBarrel()
+    {
+        // Incremenet barrel amount
+        mBarrelCount++;
+        // Increase barrel sprites shown on boat
+        for (int i = 0; i < mBarrelCount; i++)
+        {
+            // Turn BarrelSpriteGFX on
+            mOilSprites[i].SetActive(true);
+        }
     }
 }
