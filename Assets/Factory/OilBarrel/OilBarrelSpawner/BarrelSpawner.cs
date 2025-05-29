@@ -177,8 +177,8 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
 
     private void LerpToPoint2()
     {
-        mLerpTime += Time.deltaTime; // Increase lerp time for calculation below
-        float TweenXPos = Mathf.Lerp(mpAnimatedBarrelSprite.transform.position.x, mTweenPoint2.position.x, mLerpTime); // Use lerp to calculate barrel X position
+        mLerpTime += Time.deltaTime * 1.3f; // Increase lerp time for calculation below
+        float TweenXPos = Mathf.Lerp(mTweenPoint1.transform.position.x, mTweenPoint2.position.x, mLerpTime); // Use lerp to calculate barrel X position
         mpAnimatedBarrelSprite.transform.position = new Vector3(TweenXPos, mpAnimatedBarrelSprite.transform.position.y, 0f); // Apply lerp
         if (mLerpTime >= 1f)
         {
@@ -191,7 +191,7 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
     private void LerpToPoint3()
     {
         mLerpTime += Time.deltaTime; // Increase lerp time for calculation below
-        float TweenXPos = Mathf.Lerp(mpAnimatedBarrelSprite.transform.position.x, mTweenPoint3.position.x, mLerpTime); // Use lerp to calculate barrel X position
+        float TweenXPos = Mathf.Lerp(mTweenPoint2.transform.position.x, mTweenPoint3.position.x, mLerpTime); // Use lerp to calculate barrel X position
         mpAnimatedBarrelSprite.transform.position = new Vector3(TweenXPos, mpAnimatedBarrelSprite.transform.position.y, 0f); // Apply lerp
         if (mLerpTime >= 1f)
         {

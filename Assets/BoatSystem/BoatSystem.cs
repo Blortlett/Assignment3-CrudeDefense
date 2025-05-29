@@ -6,10 +6,14 @@ public class BoatSystem: MonoBehaviour
 {
     // Boat GameObject
     [SerializeField] GameObject mBoatObject;
+    [SerializeField] BarrelHolder mBoatBarrelHolderScr;
 
-    // Boat full of barrel tracker -- boat will wait @ wait point until this is true
+    // Boat inventory tracker -- boat will wait @ wait point until this is true
     private bool mBoatIsFull = false;
-    private bool mBoatTripComplete = false;
+
+    // timer for how long boat should wait @ EndPoint before returning to StartPoint
+    [SerializeField] float mBoatRespawnMaxTimer = 5f;
+    float mBoatRespawnTimer = 5f;
 
     // -= Animations =-
     // Tween animation points
@@ -19,13 +23,15 @@ public class BoatSystem: MonoBehaviour
     // Lerp timer
     private float mLerpTime = 0f;
     // Track boat animation points
-    bool mBoatReachedPoint1 = false;
     bool mBoatReachedWaitPoint = false;
-    bool mBoatReachedPoint3 = false;
+    bool mBoatReachedEndPoint = false;
 
     void Start()
     {
-        
+        // set respawn wait timer to max time
+        mBoatRespawnTimer = mBoatRespawnMaxTimer;
+        // Set boat to start position
+        mBoatObject.transform.position = TweenPointBoatStart.position;
     }
 
     void Update()
@@ -33,6 +39,14 @@ public class BoatSystem: MonoBehaviour
         if (!mBoatReachedWaitPoint)
         {
             LerpToWaitPoint();
+        }
+        else if (mBoatIsFull && !mBoatReachedEndPoint)
+        {
+            LerpToEndPoint();
+        }
+        else if (mBoatReachedEndPoint)
+        {
+            ReturnToStartPoint();
         }
     }
 
@@ -43,16 +57,60 @@ public class BoatSystem: MonoBehaviour
 
     private void LerpToWaitPoint()
     {
-        Debug.Log("Lerpin to WaitPoint");
-        mLerpTime += Time.deltaTime / 5f; // Increase lerp time for calculation below
-        float TweenXPos = Mathf.Lerp(mBoatObject.transform.position.y, TweenPointBoatWaitPoint.position.y, mLerpTime); // Use lerp to calculate barrel Y position
+        float lerpDuration = 5.0f; // Changes lerp time
+        mLerpTime += Time.deltaTime / lerpDuration; // Calculate lerp time
+        // Calculate new position with lerp
+        float TweenXPos = Mathf.Lerp(TweenPointBoatStart.position.x, TweenPointBoatWaitPoint.position.x, mLerpTime); // Use lerp to calculate barrel Y position
+        // Apply new position
         mBoatObject.transform.position = new Vector3(TweenXPos, mBoatObject.transform.position.y, 0f); // Apply lerp
+
+        // If lerp complete
         if (mLerpTime >= 1f)
         {
             // Set / Reset animator parameters
             mBoatReachedWaitPoint = true; // set track animation bool to complete so we don't repeat above code
             mLerpTime = 0f; // reset animation timer
-            Debug.Log("Lerp complete");
         }
+    }
+
+    private void LerpToEndPoint()
+    {
+        float lerpDuration = 10.0f; // Changes lerp time
+        mLerpTime += Time.deltaTime / lerpDuration; // Calculate lerp time
+        // Calculate new position with lerp
+        float TweenXPos = Mathf.Lerp(TweenPointBoatWaitPoint.position.x, TweenPointBoatEndPoint.position.x, mLerpTime); // Use lerp to calculate barrel Y position
+        // Apply new position
+        mBoatObject.transform.position = new Vector3(TweenXPos, mBoatObject.transform.position.y, 0f); // Apply lerp
+
+        // If lerp complete
+        if (mLerpTime >= 1f)
+        {
+            // Set / Reset animator parameters
+            mBoatReachedEndPoint = true; // set track animation bool to complete so we don't repeat above code
+            mLerpTime = 0f; // reset animation timer
+        }
+    }
+
+    private void ReturnToStartPoint()
+    {
+        // Countdown respawn timer
+        mBoatRespawnTimer -= Time.deltaTime;
+        if (mBoatRespawnTimer < 0f)
+        {
+            // Respawn boat
+            mBoatObject.transform.position = TweenPointBoatStart.position;
+            ResetAnimationVariables();
+            // Empty boat barrels before respawning
+            mBoatBarrelHolderScr.EmptyBoat();
+        }
+    }
+
+    private void ResetAnimationVariables()
+    {
+        mBoatIsFull = false;
+        mBoatReachedWaitPoint = false;
+        mBoatReachedEndPoint = false;
+        mBoatRespawnTimer = 0f;
+        mLerpTime = 0f;
     }
 }

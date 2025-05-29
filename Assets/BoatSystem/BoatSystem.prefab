@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mBoatObject: {fileID: 6936524016572618809}
+  mBoatBarrelHolderScr: {fileID: 4679151487833767043}
+  mBoatRespawnMaxTimer: 5
   TweenPointBoatStart: {fileID: 4691017130930443439}
   TweenPointBoatWaitPoint: {fileID: 5122949699909948705}
   TweenPointBoatEndPoint: {fileID: 7034332955635072944}
@@ -197,11 +199,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2738992553638417602, guid: 2353c16aa3141dd4197fd64f73f14634, type: 3}
+      propertyPath: mBoatSystem
+      value: 
+      objectReference: {fileID: 1873801219100962598}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2353c16aa3141dd4197fd64f73f14634, type: 3}
+--- !u!114 &4679151487833767043 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2738992553638417602, guid: 2353c16aa3141dd4197fd64f73f14634, type: 3}
+  m_PrefabInstance: {fileID: 7416712029246629953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c194829d24e3f47a29945d9c426979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6936524016572618809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 481339376880218232, guid: 2353c16aa3141dd4197fd64f73f14634, type: 3}

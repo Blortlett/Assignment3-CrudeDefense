@@ -10,7 +10,9 @@ public class BarrelHolder : MonoBehaviour
     // Barrel sprites
     [SerializeField] private GameObject[] mOilSprites = new GameObject[6];
     // Barrels on boat counter
+    int mMaxBarrels = 6;
     int mBarrelCount = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +33,39 @@ public class BarrelHolder : MonoBehaviour
     {
         // Incremenet barrel amount
         mBarrelCount++;
+
         // Increase barrel sprites shown on boat
-        for (int i = 0; i < mBarrelCount; i++)
+        SetSprites();
+        
+        // If boat full, alert BoatSystem script
+        if (mBarrelCount > 5)
         {
-            // Turn BarrelSpriteGFX on
-            mOilSprites[i].SetActive(true);
+            mBoatSystem.OnBoatFull();
         }
+    }
+
+    private void SetSprites()
+    {
+        // Loop through all barrel sprites. Turn on/off sprites for mBarrelCount
+        for (int i = 0; i < mMaxBarrels; i++)
+        {
+            // if barrel is part of barrel count
+            if (i < mBarrelCount)
+            {
+                // Turn BarrelSpriteGFX on
+                mOilSprites[i].SetActive(true);
+            }
+            else
+            {
+                // Turn BarrelSpriteGFX off
+                mOilSprites[i].SetActive(false);
+            }
+        }
+    }
+
+    public void EmptyBoat()
+    {
+        mBarrelCount = 0;
+        SetSprites();
     }
 }
