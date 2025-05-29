@@ -73,7 +73,11 @@ public class BarrelSpawner : MonoBehaviour, IPickupable, IButtonable, IPressureP
         // Lerp Barrel to third point (Push barrel along to pickup point) // Barrel should also be full
         else if (mBarrelReachedPoint2 && !mBarrelReachedPoint3 && mBarrelFull)
         {
-            LerpToPoint3();
+            // Wait timer before moving to final point
+            mBarrelWaitTimer -= Time.deltaTime;
+            if (mBarrelWaitTimer < 0f)
+                // Move 
+                LerpToPoint3();
         }
     }
 

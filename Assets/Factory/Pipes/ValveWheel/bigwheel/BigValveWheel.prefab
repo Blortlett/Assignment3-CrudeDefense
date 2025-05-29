@@ -51,7 +51,7 @@ MonoBehaviour:
   WheelBackwardAnimSpeed: 0.4
   mTurnpipeOpeningSpeed: 0.5
   mTurnpipeClosingSpeed: 0.15
-  mTurnPipeOpenTimeMax: 3
+  mTurnPipeOpenTimeMax: 6
   mAnimator: {fileID: 1826119416425605529}
   mValveWheelableObject: {fileID: 0}
   mProgressBarScr: {fileID: 3007617391178307212}

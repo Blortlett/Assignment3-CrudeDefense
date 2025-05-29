@@ -102,6 +102,7 @@ public class BoatSystem: MonoBehaviour
             ResetAnimationVariables();
             // Empty boat barrels before respawning
             mBoatBarrelHolderScr.EmptyBoat();
+            Globals.instance.BarrelSold();
         }
     }
 
