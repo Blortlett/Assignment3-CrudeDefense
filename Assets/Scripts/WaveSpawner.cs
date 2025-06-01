@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,8 @@ using UnityEngine;
 public class WaveSpawner: MonoBehaviour
 {
     [SerializeField] private List<Wave> Waves; //Wave Configurations
-    [SerializeField] private List<EnemyFlyWeight> EnemyTypes; //Storing all enemies
+    //[SerializeField] private List<EnemyFlyWeight> EnemyTypes; //Storing all enemies
+    [SerializeField] private List<Factory_Enemies.EnemyType> EnemyTypes;
     [SerializeField] private GameObject enemyPrefab; //Prefab for enemies
     [SerializeField] private Transform[] SpawnPoints; //Spawn locations
 
@@ -13,15 +15,19 @@ public class WaveSpawner: MonoBehaviour
 
     private void Start()
     {
-        //Populating Flyweights
-        EnemyTypes = new List<EnemyFlyWeight>
+        foreach (Factory_Enemies.EnemyType enemyType in Enum.GetValues(typeof(Factory_Enemies.EnemyType)))
         {
-            EnemyFlyweightFactory.PolarBear,
-            EnemyFlyweightFactory.Penguin,
-            EnemyFlyweightFactory.Wolf,
-            EnemyFlyweightFactory.Owl,
-            EnemyFlyweightFactory.Seal
-        };
+            EnemyTypes.Add(enemyType);
+        }
+        ////Populating Flyweights
+        //EnemyTypes = new List<EnemyFlyWeight>
+        //{
+        //    EnemyFlyweightFactory.PolarBear,
+        //    EnemyFlyweightFactory.Penguin,
+        //    EnemyFlyweightFactory.Wolf,
+        //    EnemyFlyweightFactory.Owl,
+        //    EnemyFlyweightFactory.Seal
+        //};
 
         StartCoroutine(SpawnWaves());
     }
@@ -30,6 +36,7 @@ public class WaveSpawner: MonoBehaviour
     {
         while (CurrentWaveIndex < Waves.Count)
         {
+            Debug.Log("Entered spawner");
             Wave Wave = Waves[CurrentWaveIndex];
 
             yield return new WaitForSeconds(Wave.InitialDelay);
@@ -38,42 +45,99 @@ public class WaveSpawner: MonoBehaviour
 
             while (CurrentCostSum < Wave.MaxEnemyCost)
             {
-                List<EnemyFlyWeight> AffordableEnemies = new List<EnemyFlyWeight>();
-                //While there's budget to add enemies to the list to spawn,
-                //add enemies.
-                foreach (EnemyFlyWeight ET in EnemyTypes)
+                Debug.Log("Entered CurrentCostSum < Wave.MaxEnemyCost");
+                List<Factory_Enemies.EnemyType> AffordableEnemies = new List<Factory_Enemies.EnemyType>();
+                Debug.Log(AffordableEnemies);
+
+                if (EnemyTypes == null || EnemyTypes.Count == 0)
                 {
-                    if (ET.miCost <= (Wave.MaxEnemyCost - CurrentCostSum))
-                    {
-                        AffordableEnemies.Add(ET);
-                    }
+                    Debug.LogError("EnemyTypes list is empty!  Contents: " + (EnemyTypes == null ? "null" : EnemyTypes.Count));
+                    yield break;
                 }
 
-                //If we run out of AffordableEnemies, stop spawning
+                Dictionary<Factory_Enemies.EnemyType, int> EnemyCostMap = new Dictionary<Factory_Enemies.EnemyType, int>
+                {
+                    {Factory_Enemies.EnemyType.PolarBear, EnemyPolarBear.Cost },
+                    {Factory_Enemies.EnemyType.Penguin, EnemyPenguin.Cost },
+                    {Factory_Enemies.EnemyType.Wolf, EnemyWolf.Cost },
+                    {Factory_Enemies.EnemyType.Owl, EnemyOwl.Cost },
+                    {Factory_Enemies.EnemyType.Seal, EnemySeal.Cost }
+                };
+
+                foreach (var Enemy in EnemyTypes)
+                {
+                    Debug.Log("Entered foreach Enemy in EnemyTypes");
+                    if (EnemyCostMap.TryGetValue(Enemy, out int EnemyCost))
+                    {
+                        if (EnemyCost <= Wave.MaxEnemyCost - CurrentCostSum)
+                        {
+                            AffordableEnemies.Add(Enemy);
+                        }
+                    }
+
+                }
                 if (AffordableEnemies.Count == 0)
                 {
+                    Debug.Log("Entered AffordableEnemies.Count == 0");
                     break;
                 }
 
-                //Pick a random enemy FlyWeight
-                EnemyFlyWeight ChosenFlyWeight = AffordableEnemies[Random.Range(0, AffordableEnemies.Count)];
-                //Pick a spawn point
-                Transform SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
-                //Instantiate the enemy
-                GameObject EnemyObject = Instantiate(enemyPrefab, SpawnPoint.position, Quaternion.identity);
+                Factory_Enemies.EnemyType ChosenType = AffordableEnemies[UnityEngine.Random.Range(0, AffordableEnemies.Count)];
 
-                //Initialise the enemy
-                Enemy EnemyComp = EnemyObject.GetComponent<Enemy>();
-                if (EnemyComp != null)
-                {
-                    EnemyComp.Initialize(ChosenFlyWeight);
-                }
+                Transform SpawnPoint = SpawnPoints[UnityEngine.Random.Range(0, SpawnPoints.Length)];
+                GameObject EnemyObject = Factory_Enemies.instance.CreateAnimal(ChosenType, SpawnPoint);
 
                 //Update CurrentCostSum
-                CurrentCostSum += ChosenFlyWeight.miCost;
+                if(EnemyCostMap.TryGetValue(ChosenType, out int ChosenCost))
+                {
+                    CurrentCostSum += ChosenCost;
+                    Debug.Log($"Spawned{ChosenType} with cost {ChosenCost}. Total Cost: {CurrentCostSum / Wave.MaxEnemyCost}");
+                }
+                else
+                {
+                    Debug.LogWarning($"ChosenType {ChosenType} not found in cost map!");
+                }
 
                 //Wait for spawn interval before spawning new enemy
                 yield return new WaitForSeconds(Wave.SpawnInterval);
+                
+                //List<EnemyFlyWeight> AffordableEnemies = new List<EnemyFlyWeight>();
+                ////While there's budget to add enemies to the list to spawn,
+                ////add enemies.
+                //foreach (EnemyFlyWeight ET in EnemyTypes)
+                //{
+                //    if (ET.miCost <= (Wave.MaxEnemyCost - CurrentCostSum))
+                //    {
+                //        AffordableEnemies.Add(ET);
+                //    }
+                //}
+
+                ////If we run out of AffordableEnemies, stop spawning
+                //if (AffordableEnemies.Count == 0)
+                //{
+                //    break;
+                //}
+
+                ////Pick a random enemy FlyWeight
+                //EnemyFlyWeight ChosenFlyWeight = AffordableEnemies[Random.Range(0, AffordableEnemies.Count)];
+                ////Pick a spawn point
+                //Transform SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+                ////Instantiate the enemy
+                ////GameObject EnemyObject = Instantiate(enemyPrefab, SpawnPoint.position, Quaternion.identity);
+                //GameObject EnemyObject = Factory_Enemies.CreateAnimal(ChosenFlyWeight, SpawnPoint);
+
+                ////Initialise the enemy
+                //Enemy EnemyComp = EnemyObject.GetComponent<Enemy>();
+                //if (EnemyComp != null)
+                //{
+                //    EnemyComp.Initialize(ChosenFlyWeight);
+                //}
+
+                ////Update CurrentCostSum
+                //CurrentCostSum += ChosenFlyWeight.miCost;
+
+                ////Wait for spawn interval before spawning new enemy
+                //yield return new WaitForSeconds(Wave.SpawnInterval);
             }
 
             //Wait before starting the next wave
@@ -81,6 +145,7 @@ public class WaveSpawner: MonoBehaviour
             CurrentWaveIndex++;
         }
     }
+
 }
 
 [System.Serializable]

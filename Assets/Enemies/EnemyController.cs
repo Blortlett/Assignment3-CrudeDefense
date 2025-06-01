@@ -20,15 +20,41 @@ public class Enemy : MonoBehaviour, IEnemy
 
     bool mIsTrapped = false;
 
+    //void Start()
+    //{
+    //    Vector2 currentPosition = transform.position;
+    //    mMovementDirection = new Vector2(-currentPosition.x, 0).normalized;
+
+    //    mAnimator.runtimeAnimatorController = mpFlyweight.pAnmatorController;
+
+    //    SetFacingDirection();
+    //}
+
     void Start()
     {
         Vector2 currentPosition = transform.position;
         mMovementDirection = new Vector2(-currentPosition.x, 0).normalized;
 
-        mAnimator.runtimeAnimatorController = mpFlyweight.pAnmatorController;
+        if (mAnimator == null)
+        {
+            Debug.LogError("mAnimator is null in EnemyController.Start()");
+        }
+        if (mpFlyweight == null)
+        {
+            Debug.LogError("mpFlyweight is null in EnemyController.Start()");
+        }
+        else if (mpFlyweight.pAnmatorController == null)
+        {
+            Debug.LogError("mpFlyweight.pAnmatorController is null");
+        }
+        else
+        {
+            mAnimator.runtimeAnimatorController = mpFlyweight.pAnmatorController;
+        }
 
         SetFacingDirection();
     }
+
 
     void Update()
     {
