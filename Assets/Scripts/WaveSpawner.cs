@@ -55,26 +55,14 @@ public class WaveSpawner: MonoBehaviour
                     yield break;
                 }
 
-                Dictionary<Factory_Enemies.EnemyType, int> EnemyCostMap = new Dictionary<Factory_Enemies.EnemyType, int>
-                {
-                    {Factory_Enemies.EnemyType.PolarBear, EnemyPolarBear.Cost },
-                    {Factory_Enemies.EnemyType.Penguin, EnemyPenguin.Cost },
-                    {Factory_Enemies.EnemyType.Wolf, EnemyWolf.Cost },
-                    {Factory_Enemies.EnemyType.Owl, EnemyOwl.Cost },
-                    {Factory_Enemies.EnemyType.Seal, EnemySeal.Cost }
-                };
-
                 foreach (var Enemy in EnemyTypes)
                 {
                     Debug.Log("Entered foreach Enemy in EnemyTypes");
-                    if (EnemyCostMap.TryGetValue(Enemy, out int EnemyCost))
+                    int EnemyCost = Factory_Enemies.instance.GetCost(Enemy);
+                    if (EnemyCost <= Wave.MaxEnemyCost - CurrentCostSum)
                     {
-                        if (EnemyCost <= Wave.MaxEnemyCost - CurrentCostSum)
-                        {
-                            AffordableEnemies.Add(Enemy);
-                        }
+                        AffordableEnemies.Add(Enemy);
                     }
-
                 }
                 if (AffordableEnemies.Count == 0)
                 {
@@ -88,15 +76,9 @@ public class WaveSpawner: MonoBehaviour
                 GameObject EnemyObject = Factory_Enemies.instance.CreateAnimal(ChosenType, SpawnPoint);
 
                 //Update CurrentCostSum
-                if(EnemyCostMap.TryGetValue(ChosenType, out int ChosenCost))
-                {
-                    CurrentCostSum += ChosenCost;
-                    Debug.Log($"Spawned{ChosenType} with cost {ChosenCost}. Total Cost: {CurrentCostSum / Wave.MaxEnemyCost}");
-                }
-                else
-                {
-                    Debug.LogWarning($"ChosenType {ChosenType} not found in cost map!");
-                }
+                int ChosenCost = Factory_Enemies.instance.GetCost(ChosenType);
+                CurrentCostSum += ChosenCost;
+                Debug.Log($"Spawned{ChosenType} with cost {ChosenCost}. Total Cost: {CurrentCostSum / Wave.MaxEnemyCost}");
 
                 //Wait for spawn interval before spawning new enemy
                 yield return new WaitForSeconds(Wave.SpawnInterval);

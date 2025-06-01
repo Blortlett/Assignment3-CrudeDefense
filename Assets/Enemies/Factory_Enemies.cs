@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
@@ -94,14 +95,29 @@ public class Factory_Enemies : MonoBehaviour
 
     private EnemyFlyWeight GetFlyweight(EnemyType _Type)
     {
-        switch (_Type)
+        GameObject Temp = new GameObject("TempEnemyData");
+        //Making a temp gameobject so that the compiler doesn't complain
+        //Can't use "new" on Monobehaviours
+        IEnemies EnemyData = AttachAnimalScript(_Type, Temp);
+        RuntimeAnimatorController Controller = Resources.Load<RuntimeAnimatorController>(EnemyData.RunTimeController);
+
+        if (Controller == null)
         {
-            case EnemyType.PolarBear: return EnemyFlyweightFactory.PolarBear;
-            case EnemyType.Penguin: return EnemyFlyweightFactory.Penguin;
-            case EnemyType.Wolf: return EnemyFlyweightFactory.Wolf;
-            case EnemyType.Owl: return EnemyFlyweightFactory.Owl;
-            case EnemyType.Seal: return EnemyFlyweightFactory.Seal;
-            default: return EnemyFlyweightFactory.Seal;
+            Debug.Log($"Animator controller not found at path: {EnemyData.RunTimeController}");
         }
+
+        EnemyFlyWeight Flyweight = new EnemyFlyWeight(Controller, EnemyData.MoveSpeed, EnemyData.HitPoints, EnemyData.Cost);
+        //Destroying our temp object
+        Destroy(Temp);
+        return Flyweight;
+    }
+
+    public int GetCost(Factory_Enemies.EnemyType _Type)
+    {
+        GameObject Temp = new GameObject("TempEnemyCost");
+        IEnemies EnemyData = AttachAnimalScript(_Type, Temp);
+        int Cost = EnemyData.Cost;
+        Destroy(Temp);
+        return Cost;
     }
 }
