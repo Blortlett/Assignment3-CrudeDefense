@@ -979,7 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b38539d6a8730647b1197c25d7a95a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimalPrefab: {fileID: 0}
+  AnimalPrefab: {fileID: 7938248023522960838, guid: 03b2e21616f9c504283ea8f16c5060ce, type: 3}
   AnimalAnimators: []
 --- !u!4 &504026956
 Transform:
