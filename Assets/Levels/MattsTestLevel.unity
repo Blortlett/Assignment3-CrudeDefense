@@ -1976,11 +1976,11 @@ MonoBehaviour:
   - SpawnInterval: 1
     InitialDelay: 1
     WaveDelay: 30
-    MaxEnemyCost: 5
+    MaxEnemyCost: 10
   - SpawnInterval: 1
     InitialDelay: 30
     WaveDelay: 30
-    MaxEnemyCost: 10
+    MaxEnemyCost: 15
   - SpawnInterval: 1
     InitialDelay: 60
     WaveDelay: 30

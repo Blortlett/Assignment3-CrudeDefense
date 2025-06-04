@@ -9,26 +9,14 @@ public class Enemy : MonoBehaviour, IEnemy
     [SerializeField] private Animator mAnimator;
     [SerializeField] private SpriteRenderer mSpriteRenderer;
 
-    private EnemyFlyWeight mpFlyweight = null;
+    public EnemyFlyWeight mpFlyweight = null;
 
     private Vector2 mMovementDirection;
 
     private Vector3 mFaceLeftScale = new Vector3(1,1,1);
     private Vector3 mFaceRightScale = new Vector3(-1,1,1);
 
-
-
-    bool mIsTrapped = false;
-
-    //void Start()
-    //{
-    //    Vector2 currentPosition = transform.position;
-    //    mMovementDirection = new Vector2(-currentPosition.x, 0).normalized;
-
-    //    mAnimator.runtimeAnimatorController = mpFlyweight.pAnmatorController;
-
-    //    SetFacingDirection();
-    //}
+    public bool mIsTrapped = false;
 
     void Start()
     {
