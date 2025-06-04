@@ -55,8 +55,15 @@ public class Enemy : MonoBehaviour, IEnemy
         SetFacingDirection();
     }
 
+    private void Update()
+    {
+        if (!mIsTrapped)
+        {
+            transform.Translate(mMovementDirection * mpFlyweight.mfMoveSpeed * Time.deltaTime);
+        }
+    }
 
-    void Update()
+    public void Move()
     {
         if (!mIsTrapped)
         {
