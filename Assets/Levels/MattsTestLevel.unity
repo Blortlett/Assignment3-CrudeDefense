@@ -605,6 +605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 335552406}
   - component: {fileID: 335552407}
+  - component: {fileID: 335552408}
   m_Layer: 0
   m_Name: iceberg_Latest
   m_TagString: Untagged
@@ -679,6 +680,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &335552408
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335552405}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6ab3296977f70ff4fac93950d5a32988, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &372166966 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1025756853737450816, guid: 468fd07d8c4160a4e9d9875d4338613b, type: 3}
@@ -1976,11 +1998,11 @@ MonoBehaviour:
   - SpawnInterval: 1
     InitialDelay: 1
     WaveDelay: 30
-    MaxEnemyCost: 10
+    MaxEnemyCost: 20
   - SpawnInterval: 1
     InitialDelay: 30
     WaveDelay: 30
-    MaxEnemyCost: 15
+    MaxEnemyCost: 10
   - SpawnInterval: 1
     InitialDelay: 60
     WaveDelay: 30
