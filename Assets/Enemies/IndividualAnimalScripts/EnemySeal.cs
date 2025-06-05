@@ -34,10 +34,10 @@ public class EnemySeal : MonoBehaviour, IEnemies
     {
         if (collision.CompareTag("SealStopPoint"))
         {
-            // Make Penguin stand still
+            // Make Seal stand still
             mEnemyController.mIsTrapped = true;
             mAnimator.speed = 0f;
-            // Make Valve wheel start closing when penguin interacts
+            // Make Valve wheel start closing when Seal interacts
             mCollider.isTrigger = false;
         }
     }

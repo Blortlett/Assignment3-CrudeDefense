@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 
@@ -46,6 +42,8 @@ public class Factory_Enemies : MonoBehaviour
 
             string RuntimePath = EnemyInterface.RunTimeController;
             SetAnimalAnimator(_Type, Animal, RuntimePath);
+
+            EnemyTracker.instance.RegisterEnemy(_Type, Animal);
         }
         else
         {

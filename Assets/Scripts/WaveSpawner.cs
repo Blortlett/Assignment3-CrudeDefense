@@ -64,11 +64,18 @@ public class WaveSpawner: MonoBehaviour
                         AffordableEnemies.Add(Enemy);
                     }
                 }
-                if (AffordableEnemies.Count == 0)
+                //If Polar Bear already exists, don't allow one to spawn
+                bool PolarBearExists = EnemyTracker.instance.GetCount(Factory_Enemies.EnemyType.PolarBear) > 0;
+                if (PolarBearExists)
                 {
-                    Debug.Log("Entered AffordableEnemies.Count == 0");
-                    break;
+                    AffordableEnemies.Remove(Factory_Enemies.EnemyType.PolarBear);
+                    if (AffordableEnemies.Count == 0)
+                    {
+                        Debug.Log("Entered AffordableEnemies.Count == 0");
+                        break;
+                    }
                 }
+                    
 
                 Factory_Enemies.EnemyType ChosenType = AffordableEnemies[UnityEngine.Random.Range(0, AffordableEnemies.Count)];
 
@@ -83,43 +90,6 @@ public class WaveSpawner: MonoBehaviour
                 //Wait for spawn interval before spawning new enemy
                 yield return new WaitForSeconds(Wave.SpawnInterval);
                 
-                //List<EnemyFlyWeight> AffordableEnemies = new List<EnemyFlyWeight>();
-                ////While there's budget to add enemies to the list to spawn,
-                ////add enemies.
-                //foreach (EnemyFlyWeight ET in EnemyTypes)
-                //{
-                //    if (ET.miCost <= (Wave.MaxEnemyCost - CurrentCostSum))
-                //    {
-                //        AffordableEnemies.Add(ET);
-                //    }
-                //}
-
-                ////If we run out of AffordableEnemies, stop spawning
-                //if (AffordableEnemies.Count == 0)
-                //{
-                //    break;
-                //}
-
-                ////Pick a random enemy FlyWeight
-                //EnemyFlyWeight ChosenFlyWeight = AffordableEnemies[Random.Range(0, AffordableEnemies.Count)];
-                ////Pick a spawn point
-                //Transform SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
-                ////Instantiate the enemy
-                ////GameObject EnemyObject = Instantiate(enemyPrefab, SpawnPoint.position, Quaternion.identity);
-                //GameObject EnemyObject = Factory_Enemies.CreateAnimal(ChosenFlyWeight, SpawnPoint);
-
-                ////Initialise the enemy
-                //Enemy EnemyComp = EnemyObject.GetComponent<Enemy>();
-                //if (EnemyComp != null)
-                //{
-                //    EnemyComp.Initialize(ChosenFlyWeight);
-                //}
-
-                ////Update CurrentCostSum
-                //CurrentCostSum += ChosenFlyWeight.miCost;
-
-                ////Wait for spawn interval before spawning new enemy
-                //yield return new WaitForSeconds(Wave.SpawnInterval);
             }
 
             //Wait before starting the next wave
@@ -127,7 +97,6 @@ public class WaveSpawner: MonoBehaviour
             CurrentWaveIndex++;
         }
     }
-
 }
 
 [System.Serializable]
@@ -139,80 +108,3 @@ public class Wave
     public float WaveDelay; //Delay between waves spawning
     public int MaxEnemyCost; //Maximum "value" of a wave
 }
-
-//using static WaveSpawner;
-
-//public class WaveSpawner : MonoBehaviour
-//{
-//    public GameObject mEnemyPrefab; // Enemy Factory
-//    public int mEnemyCount; //Enemies per wave
-
-//    public float mTimeBetweenWaves;
-
-//    private float mEnemySpawnTimer;
-//    public float mEnemySpawnInterval = 3f; // Time interval between enemy spawns
-
-//    public enum eEnemyTypes
-//    {
-//        PolarBear,
-//        Penguin,
-//        Wolf,
-//        Owl
-//    }
-
-//    // Start is called before the first frame update
-//    void Start()
-//    {
-
-//    }
-
-//    // Update is called once per frame
-//    void Update()
-//    {
-//        // Handle Enemy Spawning
-//        mEnemySpawnTimer -= Time.deltaTime;
-//        if (mEnemySpawnTimer <= 0f)
-//        {
-//            SpawnEnemy();
-//            mEnemySpawnTimer = mEnemySpawnInterval;  // Reset the enemy spawn timer
-//        }
-//    }
-
-//    private void SpawnEnemy()
-//    {
-//        // Choose a random enemy type
-//        eEnemyTypes randomEnemyType = (eEnemyTypes)Random.Range(0, System.Enum.GetValues(typeof(eEnemyTypes)).Length); // Get random enemy from enemy types
-
-//        // Spawn the enemy either left or right of screen
-//        Vector3 spawnPosition;
-//        float randomX = Random.Range(0, 2);
-//        if (randomX == 1)
-//            spawnPosition = new Vector3(10f, -3.247f, -1); // spawn right of screen
-//        else
-//            spawnPosition = new Vector3(-10f, -3.247f, -1); // spawn left of screen
-
-//        // Instantiate enemy
-//        GameObject enemy = Instantiate(mEnemyPrefab, spawnPosition, Quaternion.identity);
-//        Enemy enemyScript = enemy.GetComponent<Enemy>();
-
-//        // Initialize the enemy with the correct flyweight data
-//        if (enemyScript != null)
-//        {
-//            switch (randomEnemyType)
-//            {
-//                case eEnemyTypes.PolarBear:
-//                    enemyScript.Initialize(EnemyFlyweightFactory.PolarBear);
-//                    break;
-//                case eEnemyTypes.Penguin:
-//                    enemyScript.Initialize(EnemyFlyweightFactory.Penguin);
-//                    break;
-//                case eEnemyTypes.Wolf:
-//                    enemyScript.Initialize(EnemyFlyweightFactory.Wolf);
-//                    break;
-//                case eEnemyTypes.Owl:
-//                    enemyScript.Initialize(EnemyFlyweightFactory.Owl);
-//                    break;
-//            }
-//        }
-//    }
-//}
