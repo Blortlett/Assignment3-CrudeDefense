@@ -46,6 +46,8 @@ public class Factory_Enemies : MonoBehaviour
 
             string RuntimePath = EnemyInterface.RunTimeController;
             SetAnimalAnimator(_Type, Animal, RuntimePath);
+
+            EnemyTracker.instance.RegisterEnemy(_Type, Animal);
         }
         else
         {
