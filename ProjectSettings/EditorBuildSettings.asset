@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Menu/SampleScene.unity
+    path: Assets/Menu/Main Menu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Levels/MattsTestLevel.unity
     guid: 5781beb46ef8ae445a49258f665e4960
+  - enabled: 1
+    path: Assets/Menu/Credits.unity
+    guid: 8242fc3849d7e2840af881cd77c5850b
+  - enabled: 1
+    path: Assets/Menu/Settings.unity
+    guid: a3b290b30ac27ee4f9ffb0e1b4418a75
   m_configObjects: {}
