@@ -24,6 +24,9 @@ public class EnemyOwl : MonoBehaviour, IEnemies
 
         // move owl up on start
         transform.position += new Vector3(0, 3.1f, 0);
+
+        // Delete shadow // !!! THIS IS HORRIBLE AND WILL CAUSE PROBLEMS NO DOUBT !!!
+        Destroy(transform.GetChild(0).gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
