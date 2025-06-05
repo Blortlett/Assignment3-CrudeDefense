@@ -41,4 +41,10 @@ public class EnemySeal : MonoBehaviour, IEnemies
             mCollider.isTrigger = false;
         }
     }
+
+    public void Die()
+    {
+        Debug.Log("HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+        Destroy(this.gameObject);
+    }
 }

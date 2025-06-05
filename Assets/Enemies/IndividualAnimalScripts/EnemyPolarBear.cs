@@ -60,4 +60,9 @@ public class EnemyPolarBear : MonoBehaviour, IEnemies
             mShouldSleep = true;
         }
     }
+
+    public void Die()
+    {
+        Destroy(this.gameObject);
+    }
 }

@@ -36,8 +36,12 @@ public class PlayerController : MonoBehaviour
 
     private float mTimeOfLastAttack = 0;
     private const float mAttackDelay = 1;
+    private const float mAttackDammage = 30;
 
     [SerializeField] private AudioSource HitSound;
+
+    [SerializeField] private PlayerHitVolume mHitVolume;
+    [SerializeField] private GameObject mHitVolumeGameObject;
 
 
     private void Awake()
@@ -61,11 +65,19 @@ public class PlayerController : MonoBehaviour
         HandleLader();
         CheckInteractable();
 
+
+        //
+        //Player attack
+        //
         if (Time.realtimeSinceStartup - mTimeOfLastAttack > mAttackDelay && Input.GetKey(KeyCode.F))    //If pressed E
         {
             PlayerAnimator.SetTrigger("Attack");
             HitSound.Play();
             mTimeOfLastAttack = Time.realtimeSinceStartup;
+            for(int i = 0; i < mHitVolume.GetEnemies().Count; i++)
+            {
+                mHitVolume.GetEnemies()[i].TakeDammage(mAttackDammage);
+            }
         }
         if (mGrounded)
         {
@@ -167,11 +179,13 @@ public class PlayerController : MonoBehaviour
         {
             PlayerInput += 1;
             PlayerSprite.transform.localScale = new Vector3(Mathf.Abs(PlayerSprite.transform.localScale.x), PlayerSprite.transform.localScale.y, PlayerSprite.transform.localScale.z);    //Make player face right direction
+            mHitVolumeGameObject.transform.localScale = new Vector3(Mathf.Abs(mHitVolumeGameObject.transform.localScale.x), mHitVolumeGameObject.transform.localScale.y, mHitVolumeGameObject.transform.localScale.z);
         }
         if (Input.GetKey(KeyCode.A))    //Make player face left direction
         {
             PlayerInput -= 1;
             PlayerSprite.transform.localScale = new Vector3(Mathf.Abs(PlayerSprite.transform.localScale.x) * -1, PlayerSprite.transform.localScale.y, PlayerSprite.transform.localScale.z);
+            mHitVolumeGameObject.transform.localScale = new Vector3(Mathf.Abs(mHitVolumeGameObject.transform.localScale.x) * -1, mHitVolumeGameObject.transform.localScale.y, mHitVolumeGameObject.transform.localScale.z);
         }
 
 

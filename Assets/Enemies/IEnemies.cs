@@ -9,4 +9,18 @@ public interface IEnemies
     public float HitPoints { get; set; }
     public int Cost { get; set; }
     public string RunTimeController { get; set; }
+
+    public void TakeDammage(float _Dammage)
+    {
+        Debug.Log("Take DAMMAGE");
+        HitPoints -= _Dammage;
+
+        if (HitPoints <= 0)
+        {
+            Debug.Log("DIE DIE DIE DIE DIE DIE DIE");
+            Die();
+        }
+    }
+
+    public void Die();
 }

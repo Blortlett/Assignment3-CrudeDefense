@@ -34,5 +34,10 @@ public class EnemyOwl : MonoBehaviour, IEnemies
             collision.GetComponent<ValveWheel>().AnimalInteract();
         }
     }
+
+    public void Die()
+    {
+        Destroy(this.gameObject);
+    }
 }
 

@@ -9,4 +9,9 @@ public class EnemyWolf : MonoBehaviour, IEnemies
     public float HitPoints { get; set; } = 10.0f;
     public int Cost { get; set; } = 3;
     public string RunTimeController { get; set; } = "Wolf/AnimController_Animal_Wolf";
+
+    public void Die()
+    {
+        Destroy(this.gameObject);
+    }
 }
