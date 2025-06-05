@@ -27,10 +27,6 @@ public class ValveWheel : MonoBehaviour, IInteractable
     [SerializeField] float mTurnpipeClosingSpeed = .5f;
     WheelState mCurrentWheelState = WheelState.WHEELSTATE_Closed;
 
-    // Turnpipe stay open for timer
-    float mTurnPipeCurrentOpenTime = 0f;
-    [SerializeField] float mTurnPipeOpenTimeMax = 3f;
-
     // Prefab's own components
     [SerializeField] private Animator mAnimator;
 
@@ -44,6 +40,15 @@ public class ValveWheel : MonoBehaviour, IInteractable
     public bool CanInteract()
     {
         return true;
+    }
+
+    public void AnimalInteract()
+    {
+        // if wheel is open or opening
+        if (mCurrentWheelState == WheelState.WHEELSTATE_Open || mCurrentWheelState == WheelState.WHEELSTATE_Opening)
+        {
+            mCurrentWheelState = WheelState.WHEELSTATE_Closing;
+        }
     }
 
     public void Interact()
@@ -93,7 +98,6 @@ public class ValveWheel : MonoBehaviour, IInteractable
                 // If turnwheel == max time, set state to open & timer to full
                 if (mTurnpipeCurrentOpenAmount >= mTurnpipeMaxOpen)
                 {
-                    mTurnPipeCurrentOpenTime = mTurnPipeOpenTimeMax; // reset timer for how long turnpipe should be open for
                     mCurrentWheelState = WheelState.WHEELSTATE_Open; // Set state to open
                 }
                 break;
@@ -101,13 +105,6 @@ public class ValveWheel : MonoBehaviour, IInteractable
             case WheelState.WHEELSTATE_Open:
                 // Set animator speed to stopped
                 mAnimator.speed = 0f;
-                // Wheel stays open only for a certain timer
-                mTurnPipeCurrentOpenTime -= Time.fixedDeltaTime;
-                // If timer hit zero - turnpipe closed
-                if (mTurnPipeCurrentOpenTime <= 0f)
-                {
-                    mCurrentWheelState = WheelState.WHEELSTATE_Closing;  // Set state to closing
-                }
                 break;
 
             case WheelState.WHEELSTATE_Closing:

@@ -7,4 +7,3 @@ public interface IEnemy
     public void Trap();
     public void BlowUp();
 }
-

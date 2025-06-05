@@ -11,11 +11,28 @@ public class EnemyOwl : MonoBehaviour, IEnemies
     public int Cost { get; set; } = 2;
     public string RunTimeController { get; set; } = "Owl/AnimController_Animal_Owl";
 
+    // Store enemy controller
+    private Enemy mEnemyController;
+
     private void Start()
     {
-        // move owl up
+        // Set Tag as Owl
+        gameObject.tag = "Owl";
+
+        // Get Owl controller
+        mEnemyController = GetComponent<Enemy>();
+
+        // move owl up on start
         transform.position += new Vector3(0, 3.1f, 0);
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("ValveWheel"))
+        {
+            // Set wheel to closing when owl touches it
+            collision.GetComponent<ValveWheel>().AnimalInteract();
+        }
+    }
 }
 
