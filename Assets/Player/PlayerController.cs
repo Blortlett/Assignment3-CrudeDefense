@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource HitSound;
 
-    [SerializeField] private PlayerHitVolume mHitVolume;
+    [SerializeField] public PlayerHitVolume mHitVolume;
     [SerializeField] private GameObject mHitVolumeGameObject;
 
 
@@ -179,13 +179,15 @@ public class PlayerController : MonoBehaviour
         {
             PlayerInput += 1;
             PlayerSprite.transform.localScale = new Vector3(Mathf.Abs(PlayerSprite.transform.localScale.x), PlayerSprite.transform.localScale.y, PlayerSprite.transform.localScale.z);    //Make player face right direction
-            mHitVolumeGameObject.transform.localScale = new Vector3(Mathf.Abs(mHitVolumeGameObject.transform.localScale.x), mHitVolumeGameObject.transform.localScale.y, mHitVolumeGameObject.transform.localScale.z);
+
+            mHitVolumeGameObject.transform.localPosition = new Vector3(Mathf.Abs(mHitVolumeGameObject.transform.localPosition.x), mHitVolumeGameObject.transform.localPosition.y, mHitVolumeGameObject.transform.localPosition.z);
         }
         if (Input.GetKey(KeyCode.A))    //Make player face left direction
         {
             PlayerInput -= 1;
             PlayerSprite.transform.localScale = new Vector3(Mathf.Abs(PlayerSprite.transform.localScale.x) * -1, PlayerSprite.transform.localScale.y, PlayerSprite.transform.localScale.z);
-            mHitVolumeGameObject.transform.localScale = new Vector3(Mathf.Abs(mHitVolumeGameObject.transform.localScale.x) * -1, mHitVolumeGameObject.transform.localScale.y, mHitVolumeGameObject.transform.localScale.z);
+
+            mHitVolumeGameObject.transform.localPosition = new Vector3(Mathf.Abs(mHitVolumeGameObject.transform.localPosition.x) * -1, mHitVolumeGameObject.transform.localPosition.y, mHitVolumeGameObject.transform.localPosition.z);
         }
 
 
@@ -250,7 +252,7 @@ public class PlayerController : MonoBehaviour
         IPickupable PickupableScript = HeldObject.GetComponent<IPickupable>();
         PickupableScript.PutDown();
 
-        HeldObject.transform.position = new Vector3(HeldObject.transform.position.x, HeldObject.GetComponent<IPickupable>().GetOriginalYPosition(), HeldObject.transform.position.z); //Put object back on ground
+        HeldObject.transform.position = new Vector3(HeldObject.transform.position.x, -3.4f, HeldObject.transform.position.z); //Put object back on ground
         HeldObject = null;  //Playing is no longer holding object
 
     }
