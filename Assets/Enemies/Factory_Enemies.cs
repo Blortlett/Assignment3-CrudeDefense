@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Timeline;
 
 
 public class Factory_Enemies : MonoBehaviour
@@ -14,6 +15,7 @@ public class Factory_Enemies : MonoBehaviour
     public static Factory_Enemies instance { private set; get; }
     public GameObject AnimalPrefab;
     public RuntimeAnimatorController[] AnimalAnimators;
+
 
     void Awake()
     {
@@ -33,6 +35,8 @@ public class Factory_Enemies : MonoBehaviour
         GameObject Animal = Instantiate(AnimalPrefab, _Position);
         AttachAnimalScript(_Type, Animal);
         IEnemies EnemyInterface = Animal.GetComponent<IEnemies>();
+        // Add audio clip for hit
+        AddAnimalHitAudio(_Type, Animal);
         Enemy EnemyComponent = Animal.GetComponent<Enemy>();
         if (EnemyInterface != null)
         {
@@ -51,6 +55,32 @@ public class Factory_Enemies : MonoBehaviour
         }
         return Animal;
     }
+
+    private void AddAnimalHitAudio(EnemyType _Type, GameObject _AnimalPrefab)
+    {
+        // Get Audio source attatched to animal
+        AudioSource AnimalAudio = AnimalPrefab.GetComponent<AudioSource>();
+
+        switch (_Type)
+        {
+            case EnemyType.PolarBear:
+                AnimalAudio.clip = Resources.Load<AudioClip>("Polarbear/PolarBear");
+                break;
+            case EnemyType.Penguin:
+                AnimalAudio.clip = Resources.Load<AudioClip>("Penguin/Penguin");
+                break;
+            case EnemyType.Wolf:
+                AnimalAudio.clip = Resources.Load<AudioClip>("Wolf/Wolf");
+                break;
+            case EnemyType.Owl:
+                AnimalAudio.clip = Resources.Load<AudioClip>("Owl/Owl");
+                break;
+            case EnemyType.Seal:
+                AnimalAudio.clip = Resources.Load<AudioClip>("Seal/Seal");
+                break;
+        }
+    }
+
     private IEnemies AttachAnimalScript(EnemyType _Type, GameObject _AnimalPrefab)
     {
         switch (_Type)

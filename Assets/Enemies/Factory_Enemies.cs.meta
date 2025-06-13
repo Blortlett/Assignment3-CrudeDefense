@@ -3,7 +3,13 @@ guid: 3b38539d6a8730647b1197c25d7a95a1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - AnimalPrefab: {instanceID: 0}
+  - PolarbearHitSound: {fileID: 8300000, guid: 4d28fa3fb1764d844ab1b9dae41b67b9, type: 3}
+  - SealHitSound: {fileID: 8300000, guid: 71ad84aaca43f1b4fbe6ba7aefe5f916, type: 3}
+  - WolfHitSound: {fileID: 8300000, guid: b32578177742fe84995e1d118f82fb01, type: 3}
+  - PenguinHitSound: {fileID: 8300000, guid: b888ea58c41558f41ae5af39ea1813fd, type: 3}
+  - OwlHitSound: {fileID: 8300000, guid: d6783a6090aae3143b6a8f1f9b513e51, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
