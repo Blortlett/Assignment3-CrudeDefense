@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour
         IInteractable ObjectOverlapInteract = mOverlappingObjects[0].GetComponent<IInteractable>();
         if (ObjectOverlapInteract != null)
         {
-            Debug.Log("Interactable found!");
             if (ObjectOverlapInteract.CanInteract())
             {
                 InteractableUI.SetActive(true);
@@ -110,7 +109,6 @@ public class PlayerController : MonoBehaviour
             IPickupable ObjectOverlapPickup = mOverlappingObjects[0].GetComponent<IPickupable>();
             if (ObjectOverlapPickup != null)
             {
-                Debug.Log("Pickupable found!");
                 // Check if player can pickup item
                 if (ObjectOverlapPickup.CanPickup())
                 {
@@ -327,7 +325,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Grounded");
         mGrounded = true;
     }
 

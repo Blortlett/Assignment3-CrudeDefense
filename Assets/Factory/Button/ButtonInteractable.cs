@@ -7,12 +7,16 @@ public class ButtonInteractable : MonoBehaviour,  IInteractable
     [SerializeField] private GameObject mToggleableObject;
     private IButtonable mToggleableScript;
 
-    [SerializeField] private SpriteRenderer mButtonSprite;
-    [SerializeField] private Color mUnpressedButtonColor;
-    [SerializeField] private Color mPressedButtonColor;
+    [SerializeField] private Animator mButtonAnimator;
+
 
     private float mButtonPressedTimer; // Countdown timer
     private const float mButtonPressedTimeMax = .5f; // Time to reset to
+
+    private void Awake()
+    {
+        
+    }
 
     public bool CanInteract()
     {
@@ -25,7 +29,7 @@ public class ButtonInteractable : MonoBehaviour,  IInteractable
         if (mButtonPressedTimer <= 0f)
         {
             mButtonPressedTimer = mButtonPressedTimeMax;
-            mButtonSprite.color = mPressedButtonColor;
+            mButtonAnimator.SetBool("IsPressed", true);
         }
 
         // Make the button press do something
@@ -57,7 +61,7 @@ public class ButtonInteractable : MonoBehaviour,  IInteractable
         else
         {
             // Reset color
-            mButtonSprite.color = mUnpressedButtonColor;
+            mButtonAnimator.SetBool("IsPressed", false);
         }
     }
 }
