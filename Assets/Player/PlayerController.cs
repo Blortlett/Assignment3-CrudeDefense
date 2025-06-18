@@ -224,7 +224,12 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLader()
     {
-        if (!mCanLader) return; // If player cant lader, break out of this function and move on // Dont handle up/down input
+        if (!mCanLader)
+        {
+            PlayerAnimator.SetBool("IsLaddering", false);
+            return; // If player cant lader, break out of this function and move on // Dont handle up/down input
+        }
+        PlayerAnimator.SetBool("IsLaddering", true);
 
         if (Input.GetKey(KeyCode.W))
         {
