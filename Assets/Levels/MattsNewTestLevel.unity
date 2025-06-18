@@ -352,6 +352,10 @@ PrefabInstance:
       value: 0.83206
       objectReference: {fileID: 0}
     - target: {fileID: 5618603712628793312, guid: 0a5e8dbf23f0980478f1cd9184751a8e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618603712628793312, guid: 0a5e8dbf23f0980478f1cd9184751a8e, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.427
       objectReference: {fileID: 0}
@@ -1605,7 +1609,7 @@ MonoBehaviour:
   mTutorialArrowCoalBags: {fileID: 1158712180}
   mTutorialArrowFurnace: {fileID: 1472716989}
   mTutorialArrowBigWheel: {fileID: 759927422}
-  mTutorialArrowBarrelButton: {fileID: 0}
+  mTutorialArrowBarrelButton: {fileID: 759927422}
   mTutorialArrowPressurePad: {fileID: 1208916692}
   mTutorialArrowSpawnerDropoff: {fileID: 631341983}
 --- !u!1 &1029870667
