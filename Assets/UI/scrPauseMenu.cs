@@ -1,7 +1,5 @@
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class scrPauseMenu : MonoBehaviour
 {
@@ -26,7 +24,7 @@ public class scrPauseMenu : MonoBehaviour
             mIsPaused = true;
             mCanvasGroup.alpha = 1f; // Show pause menu
             Time.timeScale = 0f; // Pause game
-            UnityEngine.Cursor.visible = false;
+            UnityEngine.Cursor.visible = true;
         }
     }
 
