@@ -227,6 +227,7 @@ public class PlayerController : MonoBehaviour
         if (!mCanLader)
         {
             PlayerAnimator.SetBool("IsLaddering", false);
+            PlayerAnimator.speed = 1f;
             return; // If player cant lader, break out of this function and move on // Dont handle up/down input
         }
         PlayerAnimator.SetBool("IsLaddering", true);
@@ -235,15 +236,19 @@ public class PlayerController : MonoBehaviour
         {
             // Travel up on W key input
             Rb.velocity = new Vector2(Rb.velocity.x, mLaderSpeed);
-        }else if (Input.GetKey(KeyCode.S))
+            PlayerAnimator.speed = 1f;
+        }
+        else if (Input.GetKey(KeyCode.S))
         {
             // Travel down on S key input // inversed lader speed
-            Rb.velocity = new Vector2(Rb.velocity.x, -1 * mLaderSpeed); 
+            Rb.velocity = new Vector2(Rb.velocity.x, -1 * mLaderSpeed);
+            PlayerAnimator.speed = 1f;
         }
         else
         {
             // No input, zero y velocity
             Rb.velocity = new Vector2(Rb.velocity.x, 0);
+            PlayerAnimator.speed = .0f;
         }
     }
 
