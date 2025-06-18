@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour, IEnemy
     [SerializeField] private Animator mAnimator;
     [SerializeField] private SpriteRenderer mSpriteRenderer;
 
+    private AudioSource mAnimalAudio;
+
     public EnemyFlyWeight mpFlyweight = null;
 
     private Vector2 mMovementDirection;
@@ -43,6 +45,9 @@ public class Enemy : MonoBehaviour, IEnemy
         }
 
         SetFacingDirection();
+
+        // Get audio controller:
+        mAnimalAudio = GetComponentInChildren<AudioSource>();
     }
 
     private void Update()
@@ -57,6 +62,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public void OnHit()
     {
         Instantiate(mOnHitBloodGFX, transform);
+        mAnimalAudio.Play();
     }
 
     public void Move()
