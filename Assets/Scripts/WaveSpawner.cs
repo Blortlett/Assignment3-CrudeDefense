@@ -6,7 +6,6 @@ using UnityEngine;
 public class WaveSpawner: MonoBehaviour
 {
     [SerializeField] private List<Wave> Waves; //Wave Configurations
-    //[SerializeField] private List<EnemyFlyWeight> EnemyTypes; //Storing all enemies
     [SerializeField] private List<Factory_Enemies.EnemyType> EnemyTypes;
     [SerializeField] private GameObject enemyPrefab; //Prefab for enemies
     [SerializeField] private Transform[] SpawnPoints; //Spawn locations
@@ -19,15 +18,6 @@ public class WaveSpawner: MonoBehaviour
         {
             EnemyTypes.Add(enemyType);
         }
-        ////Populating Flyweights
-        //EnemyTypes = new List<EnemyFlyWeight>
-        //{
-        //    EnemyFlyweightFactory.PolarBear,
-        //    EnemyFlyweightFactory.Penguin,
-        //    EnemyFlyweightFactory.Wolf,
-        //    EnemyFlyweightFactory.Owl,
-        //    EnemyFlyweightFactory.Seal
-        //};
 
         StartCoroutine(SpawnWaves());
     }
@@ -64,17 +54,62 @@ public class WaveSpawner: MonoBehaviour
                         AffordableEnemies.Add(Enemy);
                     }
                 }
-                //If Polar Bear already exists, don't allow one to spawn
-                bool PolarBearExists = EnemyTracker.instance.GetCount(Factory_Enemies.EnemyType.PolarBear) > 0;
-                if (PolarBearExists)
+                //If an enemy already exists, don't allow it to spawn
+                for (int i = AffordableEnemies.Count - 1; i >= 0 ; i--)
                 {
-                    AffordableEnemies.Remove(Factory_Enemies.EnemyType.PolarBear);
-                    if (AffordableEnemies.Count == 0)
+                    var EnemyType = AffordableEnemies[i];
+                    int ExistingCount = EnemyTracker.instance.GetCount(EnemyType);
+                    if (ExistingCount >= 1)
                     {
-                        Debug.Log("Entered AffordableEnemies.Count == 0");
-                        break;
+                        AffordableEnemies.RemoveAt(i);
                     }
                 }
+
+                while (AffordableEnemies.Count == 0)
+                {
+                    Debug.Log("No affordable enemies that don't already exist");
+                    yield return new WaitForSeconds(1f);
+                    
+                    //Rebuild AffordableEnemies
+                    AffordableEnemies.Clear();
+                    foreach (var Enemy in EnemyTypes)
+                    {
+                        int EnemyCost = Factory_Enemies.instance.GetCost(Enemy);
+                        if (EnemyCost <= Wave.MaxEnemyCost - CurrentCostSum)
+                        {
+                            AffordableEnemies.Add(Enemy);
+                        }
+                    }
+                    
+                    //If an enemy already exists, don't allow it to spawn
+                    for (int i = AffordableEnemies.Count - 1; i >= 0 ; i--)
+                    {
+                        var EnemyType = AffordableEnemies[i];
+                        int ExistingCount = EnemyTracker.instance.GetCount(EnemyType);
+                        Debug.Log($"Checking {EnemyType}, ExistingCount = {ExistingCount}");
+                        if (ExistingCount >= 1)
+                        {
+                            AffordableEnemies.RemoveAt(i);
+                        }
+                    }
+                }
+                // if (AffordableEnemies.Count == 0)
+                // {
+                //     Debug.Log("Entered AffordableEnemies.Count == 0");
+                //     yield return new WaitForSeconds(5f);
+                //     continue;
+                // }
+                
+                // bool PolarBearExists = EnemyTracker.instance.GetCount(Factory_Enemies.EnemyType.PolarBear) > 0;
+                // if (PolarBearExists)
+                // {
+                //     AffordableEnemies.Remove(Factory_Enemies.EnemyType.PolarBear);
+                //     if (AffordableEnemies.Count == 0)
+                //     {
+                //         Debug.Log("Entered AffordableEnemies.Count == 0");
+                //         break;
+                //     }
+                // }
                     
 
                 Factory_Enemies.EnemyType ChosenType = AffordableEnemies[UnityEngine.Random.Range(0, AffordableEnemies.Count)];
@@ -102,7 +137,6 @@ public class WaveSpawner: MonoBehaviour
 [System.Serializable]
 public class Wave
 {
-    //public int EnemyCount; //Amount of enemies per wave
     public float SpawnInterval; //Delay between enemy spawns
     public float InitialDelay; //Delay before initial wave spawns
     public float WaveDelay; //Delay between waves spawning

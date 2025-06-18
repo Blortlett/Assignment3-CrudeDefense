@@ -40,6 +40,7 @@ public class EnemyOwl : MonoBehaviour, IEnemies
 
     public void Die()
     {
+        EnemyTracker.instance.UnregisterEnemy(Factory_Enemies.EnemyType.Owl, this.gameObject);
         Destroy(this.gameObject);
     }
 }

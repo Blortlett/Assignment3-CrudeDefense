@@ -59,7 +59,7 @@ public class Factory_Enemies : MonoBehaviour
     private void AddAnimalHitAudio(EnemyType _Type, GameObject _AnimalPrefab)
     {
         // Get Audio source attatched to animal
-        AudioSource AnimalAudio = AnimalPrefab.GetComponent<AudioSource>();
+        AudioSource AnimalAudio = _AnimalPrefab.GetComponent<AudioSource>();
 
         switch (_Type)
         {

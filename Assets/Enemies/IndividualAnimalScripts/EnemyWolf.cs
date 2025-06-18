@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,14 @@ public class EnemyWolf : MonoBehaviour, IEnemies
     public int Cost { get; set; } = 3;
     public string RunTimeController { get; set; } = "Wolf/AnimController_Animal_Wolf";
 
+    private void Start()
+    {
+        gameObject.tag = "Wolf";
+    }
+
     public void Die()
     {
+        EnemyTracker.instance.UnregisterEnemy(Factory_Enemies.EnemyType.Wolf, this.gameObject);
         Destroy(this.gameObject);
     }
 }
