@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour, IEnemy
         SetFacingDirection();
 
         // Get audio controller:
-        mAnimalAudio = GetComponentInChildren<AudioSource>();
+        mAnimalAudio = GetComponent<AudioSource>();
     }
 
     private void Update()

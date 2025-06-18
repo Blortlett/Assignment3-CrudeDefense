@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Waves: []
+  EnemyTypes: 
   enemyPrefab: {fileID: 0}
   SpawnPoints: []
 --- !u!114 &6616632018697279462
@@ -204,7 +205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (Click to continue)
+  m_text: (Press 'E' to continue)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f8f567b987fe0084b89fc1abe0a23559, type: 2}
   m_sharedMaterial: {fileID: 6937785733857453011, guid: f8f567b987fe0084b89fc1abe0a23559, type: 2}

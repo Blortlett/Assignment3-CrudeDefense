@@ -73,8 +73,8 @@ public class TutorialScr : MonoBehaviour
 
     void Update()
     {
-        // Get LeftMouse Button down // Dialog system
-        if (Input.GetMouseButtonDown(0))
+        // Get E Button down // Dialog system
+        if (Input.GetKeyDown(KeyCode.E))
         {
             // Click to remove tutorial 1
             if (!Tutorial1Complete)
