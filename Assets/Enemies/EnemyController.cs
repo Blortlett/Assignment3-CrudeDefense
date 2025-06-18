@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public bool mIsTrapped = false;
 
+    [SerializeField] private GameObject mOnHitBloodGFX;
+
     void Start()
     {
         Vector2 currentPosition = transform.position;
@@ -45,10 +47,16 @@ public class Enemy : MonoBehaviour, IEnemy
 
     private void Update()
     {
+        // Move
         if (!mIsTrapped)
         {
             transform.Translate(mMovementDirection * mpFlyweight.mfMoveSpeed * Time.deltaTime);
         }
+    }
+
+    public void OnHit()
+    {
+        Instantiate(mOnHitBloodGFX, transform);
     }
 
     public void Move()
@@ -121,12 +129,3 @@ public class EnemyFlyWeight
         this.miCost = _Cost;
     }
 }
-
-//public static class EnemyFlyweightFactory
-//{
-//    public static EnemyFlyWeight PolarBear = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Polarbear/AnimController_Animal_PolarBear"), 1.5f, 70f, 5);
-//    public static EnemyFlyWeight Penguin = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Penguin/AnimController_Animal_Penguin"), 2f, 10f, 4);
-//    public static EnemyFlyWeight Wolf = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Wolf/AnimController_Animal_Wolf"), 3f, 10f, 3);
-//    public static EnemyFlyWeight Owl = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Owl/AnimController_Animal_Owl"), 5f, 40f, 2);
-//    public static EnemyFlyWeight Seal = new EnemyFlyWeight(Resources.Load<RuntimeAnimatorController>("Seal/AnimController_Animal_Seal"), .7f, 40f, 1);
-//}

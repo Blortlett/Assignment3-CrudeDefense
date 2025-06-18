@@ -21,6 +21,10 @@ public class EnemyPolarBear : MonoBehaviour, IEnemies
 
     private void Start()
     {
+        // Move polarbear down a wee bit
+        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - .1f, transform.position.z);
+        transform.position = newPosition;
+
         // Set Tag as polarbear
         gameObject.tag = "PolarBear";
 

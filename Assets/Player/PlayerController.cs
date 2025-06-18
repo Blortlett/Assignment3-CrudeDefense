@@ -74,9 +74,15 @@ public class PlayerController : MonoBehaviour
             PlayerAnimator.SetTrigger("Attack");
             HitSound.Play();
             mTimeOfLastAttack = Time.realtimeSinceStartup;
-            for(int i = 0; i < mHitVolume.GetEnemies().Count; i++)
+            List<IEnemies> EnemyList = mHitVolume.GetEnemies();
+            for (int i = 0; i < EnemyList.Count; i++)
             {
                 mHitVolume.GetEnemies()[i].TakeDammage(mAttackDammage);
+            }
+            List<Enemy> EnemyControllerList = mHitVolume.GetEnemyControllers();
+            for (int i = 0; i < EnemyControllerList.Count; i++)
+            {
+               EnemyControllerList[i].OnHit();
             }
         }
         if (mGrounded)

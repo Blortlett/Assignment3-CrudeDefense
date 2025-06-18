@@ -471,6 +471,7 @@ MonoBehaviour:
   mAnimator: {fileID: 4431843393848505336}
   mSpriteRenderer: {fileID: 7973602188141098277}
   mIsTrapped: 0
+  mOnHitBloodGFX: {fileID: 7511064941165993542, guid: 45baa322aa4a0d540964fd9a4238d421, type: 3}
 --- !u!61 &2981271908115890547
 BoxCollider2D:
   m_ObjectHideFlags: 0
