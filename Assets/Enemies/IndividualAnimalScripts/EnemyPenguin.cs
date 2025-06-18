@@ -7,7 +7,7 @@ public class EnemyPenguin : MonoBehaviour, IEnemies
     public string Name { get; set; } = "Penguin";
     public float MoveSpeed { get; set; } = 2.0f;
     public float HitPoints { get; set; } = 10.0f;
-    public int Cost { get; set; } = 4;
+    public int Cost { get; set; } = 1;
     public string RunTimeController { get; set; } = "Penguin/AnimController_Animal_Penguin";
 
     // Store enemy controller
@@ -43,6 +43,7 @@ public class EnemyPenguin : MonoBehaviour, IEnemies
 
     public void Die()
     {
+        EnemyTracker.instance.UnregisterEnemy(Factory_Enemies.EnemyType.Penguin, this.gameObject);
         Destroy(this.gameObject);
     }
 }

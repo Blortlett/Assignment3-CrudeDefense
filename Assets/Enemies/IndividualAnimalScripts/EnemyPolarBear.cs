@@ -67,6 +67,7 @@ public class EnemyPolarBear : MonoBehaviour, IEnemies
 
     public void Die()
     {
+        EnemyTracker.instance.UnregisterEnemy(Factory_Enemies.EnemyType.PolarBear, this.gameObject);
         Destroy(this.gameObject);
     }
 }

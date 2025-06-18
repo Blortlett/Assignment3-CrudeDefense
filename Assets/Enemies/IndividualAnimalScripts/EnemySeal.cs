@@ -7,7 +7,7 @@ public class EnemySeal : MonoBehaviour, IEnemies
     public string Name { get; set; } = "Seal";
     public float MoveSpeed { get; set; } = 0.7f;
     public float HitPoints { get; set; } = 40.0f;
-    public int Cost { get; set; } = 1;
+    public int Cost { get; set; } = 4;
     public string RunTimeController { get; set; } = "Seal/AnimController_Animal_Seal";
 
     // Store enemy controllers
@@ -45,6 +45,7 @@ public class EnemySeal : MonoBehaviour, IEnemies
     public void Die()
     {
         Debug.Log("HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+        EnemyTracker.instance.UnregisterEnemy(Factory_Enemies.EnemyType.Seal, this.gameObject);
         Destroy(this.gameObject);
     }
 }
