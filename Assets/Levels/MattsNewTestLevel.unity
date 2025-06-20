@@ -5724,48 +5724,48 @@ MonoBehaviour:
     WaveDelay: 30
     MaxEnemyCost: 5
   - SpawnInterval: 1
-    InitialDelay: 30
+    InitialDelay: 1
     WaveDelay: 30
     MaxEnemyCost: 10
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 20
     MaxEnemyCost: 15
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 20
     MaxEnemyCost: 15
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 20
     MaxEnemyCost: 15
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 20
     MaxEnemyCost: 15
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 20
     MaxEnemyCost: 15
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 20
     MaxEnemyCost: 15
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 15
     MaxEnemyCost: 15
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 15
     MaxEnemyCost: 15
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 15
     MaxEnemyCost: 15
   - SpawnInterval: 1
-    InitialDelay: 60
-    WaveDelay: 30
+    InitialDelay: 1
+    WaveDelay: 15
     MaxEnemyCost: 15
   EnemyTypes: 
   enemyPrefab: {fileID: 7938248023522960838, guid: 03b2e21616f9c504283ea8f16c5060ce, type: 3}
